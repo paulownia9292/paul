@@ -1,0 +1,818 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Novel Chat</title>
+<style>
+  :root {
+    --bg: #f6f5f2;
+    --panel: #ffffff;
+    --side: #ecebe6;
+    --text: #23221f;
+    --muted: #6f6c64;
+    --border: #d9d6ce;
+    --accent: #3b6ea8;
+    --accent-text: #ffffff;
+    --user-bg: #e3ecf7;
+    --bot-bg: #ffffff;
+    --think-bg: #f1efe8;
+    --danger: #b3412f;
+    --ok: #2f8a4a;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1b1c1f; --panel: #24262a; --side: #17181a; --text: #e6e4df; --muted: #9a978f;
+      --border: #383a3f; --accent: #6d9fd8; --accent-text: #0f1418; --user-bg: #2a3646;
+      --bot-bg: #24262a; --think-bg: #2b2c30; --danger: #e07a68; --ok: #6cc286;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1b1c1f; --panel: #24262a; --side: #17181a; --text: #e6e4df; --muted: #9a978f;
+    --border: #383a3f; --accent: #6d9fd8; --accent-text: #0f1418; --user-bg: #2a3646;
+    --bot-bg: #24262a; --think-bg: #2b2c30; --danger: #e07a68; --ok: #6cc286;
+  }
+  * { box-sizing: border-box; }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: "Yu Gothic UI", "Meiryo", "Hiragino Sans", system-ui, sans-serif;
+    font-size: 15px; display: flex; overflow: hidden;
+  }
+  button, input, textarea, select { font: inherit; color: inherit; }
+  button {
+    background: transparent; border: 1px solid var(--border); border-radius: 6px;
+    padding: 6px 10px; cursor: pointer;
+  }
+  button:hover { border-color: var(--accent); }
+  button.primary { background: var(--accent); color: var(--accent-text); border-color: var(--accent); }
+  button.danger { color: var(--danger); }
+  button:disabled { opacity: .45; cursor: default; }
+  input[type=text], input[type=number], textarea, select {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 6px; padding: 6px 8px;
+  }
+  textarea { resize: vertical; line-height: 1.6; }
+
+  /* sidebar */
+  #side {
+    width: 250px; flex-shrink: 0; background: var(--side); border-right: 1px solid var(--border);
+    display: flex; flex-direction: column;
+  }
+  #side header { padding: 12px; display: flex; gap: 6px; }
+  #side header button { flex: 1; }
+  #convList { flex: 1; overflow-y: auto; padding: 0 8px 8px; }
+  .conv {
+    padding: 8px 10px; border-radius: 6px; cursor: pointer; display: flex; align-items: center; gap: 6px;
+  }
+  .conv:hover { background: var(--panel); }
+  .conv.active { background: var(--panel); outline: 1px solid var(--border); }
+  .conv .title { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+  .conv .del { border: none; padding: 0 4px; color: var(--muted); visibility: hidden; }
+  .conv:hover .del { visibility: visible; }
+  #side footer { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 6px; flex-wrap: wrap; }
+  #side footer button { font-size: 13px; padding: 4px 8px; }
+
+  /* main */
+  #main { flex: 1; display: flex; flex-direction: column; min-width: 0; }
+  #top {
+    display: flex; align-items: center; gap: 10px; padding: 8px 14px;
+    border-bottom: 1px solid var(--border); background: var(--panel);
+  }
+  #convTitle { flex: 1; font-weight: 600; border: 1px solid transparent; background: transparent; min-width: 0; }
+  #convTitle:hover, #convTitle:focus { border-color: var(--border); }
+  #status { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; white-space: nowrap; }
+  #status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+  #status.ok .dot { background: var(--ok); }
+  #status.ng .dot { background: var(--danger); }
+  #menuBtn { display: none; }
+
+  #log { flex: 1; overflow-y: auto; padding: 18px 14px 8px; }
+  .inner { max-width: 860px; margin: 0 auto; }
+  .msg { margin-bottom: 16px; display: flex; flex-direction: column; }
+  .msg.user { align-items: flex-end; }
+  .msg .role { font-size: 12px; color: var(--muted); margin: 0 4px 3px; }
+  .bubble {
+    border: 1px solid var(--border); border-radius: 10px; padding: 10px 14px;
+    white-space: pre-wrap; word-break: break-word; line-height: 1.85; max-width: 100%;
+  }
+  .msg.user .bubble { background: var(--user-bg); max-width: 85%; }
+  .msg.assistant .bubble { background: var(--bot-bg); width: 100%; }
+  .msg.system-note .bubble { background: transparent; color: var(--muted); font-size: 13px; border-style: dashed; }
+  .bubble.err { border-color: var(--danger); color: var(--danger); }
+  .bubble textarea { width: 100%; min-height: 120px; }
+  details.think { margin-bottom: 8px; background: var(--think-bg); border-radius: 6px; padding: 4px 10px; font-size: 13px; color: var(--muted); }
+  details.think summary { cursor: pointer; }
+  .tools { display: flex; gap: 4px; margin: 4px 2px 0; opacity: 0; transition: opacity .15s; flex-wrap: wrap; }
+  .msg:hover .tools, .msg.editing .tools { opacity: 1; }
+  .tools button { font-size: 12px; padding: 2px 8px; color: var(--muted); }
+  .tools .stat { font-size: 12px; color: var(--muted); align-self: center; margin-left: 6px; }
+  .cursor::after { content: "▍"; animation: blink 1s steps(2) infinite; color: var(--accent); }
+  @keyframes blink { 50% { opacity: 0; } }
+  .empty { color: var(--muted); text-align: center; margin-top: 15vh; line-height: 2; }
+
+  #composer { border-top: 1px solid var(--border); background: var(--panel); padding: 10px 14px 12px; }
+  #composer .inner { display: flex; gap: 8px; align-items: flex-end; }
+  #input { flex: 1; min-height: 52px; max-height: 40vh; resize: none; }
+  #composer .btns { display: flex; flex-direction: column; gap: 6px; }
+  #composer .hint { font-size: 12px; color: var(--muted); margin-top: 4px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+
+  /* settings */
+  #settings {
+    width: 320px; flex-shrink: 0; border-left: 1px solid var(--border); background: var(--panel);
+    overflow-y: auto; padding: 14px; display: none;
+  }
+  #settings.open { display: block; }
+  #settings h3 { margin: 4px 0 10px; font-size: 15px; }
+  #settings h4 { margin: 18px 0 8px; font-size: 13px; color: var(--muted); }
+  .field { margin-bottom: 10px; }
+  .field label { display: block; font-size: 13px; margin-bottom: 4px; }
+  .field .row { display: flex; gap: 8px; align-items: center; }
+  .field input[type=range] { flex: 1; }
+  .field input[type=number] { width: 84px; }
+  .field textarea, .field input[type=text], .field select { width: 100%; }
+  .field small { color: var(--muted); font-size: 12px; }
+  .check { display: flex; gap: 6px; align-items: center; font-size: 13px; margin-bottom: 8px; }
+
+  @media (max-width: 900px) {
+    #side { position: fixed; z-index: 10; height: 100%; transform: translateX(-100%); transition: transform .2s; }
+    #side.open { transform: none; }
+    #menuBtn { display: inline-block; }
+    #settings { position: fixed; right: 0; z-index: 10; height: 100%; max-width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<aside id="side">
+  <header>
+    <button class="primary" id="newBtn">＋ 新しい会話</button>
+  </header>
+  <div id="convList"></div>
+  <footer>
+    <button id="exportBtn" title="全会話をJSONで保存">書き出し</button>
+    <button id="importBtn" title="JSONから読み込み">読み込み</button>
+    <button id="txtBtn" title="表示中の会話をテキストで保存">TXT保存</button>
+    <input type="file" id="importFile" accept=".json,application/json" hidden>
+  </footer>
+</aside>
+
+<main id="main">
+  <div id="top">
+    <button id="menuBtn">☰</button>
+    <input type="text" id="convTitle" placeholder="会話タイトル">
+    <div id="status"><span class="dot"></span><span id="statusText">未接続</span></div>
+    <button id="settingsBtn">⚙ 設定</button>
+  </div>
+  <div id="log"><div class="inner" id="logInner"></div></div>
+  <div id="composer">
+    <div class="inner">
+      <textarea id="input" rows="2" placeholder="メッセージを入力…"></textarea>
+      <div class="btns">
+        <button class="primary" id="sendBtn">送信</button>
+        <button id="stopBtn" disabled>停止</button>
+      </div>
+    </div>
+    <div class="inner hint">
+      <span id="keyHint"></span>
+      <span id="ctxInfo"></span>
+    </div>
+  </div>
+</main>
+
+<aside id="settings">
+  <h3>設定</h3>
+
+  <div class="field">
+    <label>Ollama のURL</label>
+    <div class="row">
+      <input type="text" id="sBase">
+      <button id="reconnectBtn">接続</button>
+    </div>
+  </div>
+  <div class="field">
+    <label>モデル</label>
+    <select id="sModel"></select>
+  </div>
+
+  <h4>この会話のシステムプロンプト</h4>
+  <div class="field">
+    <textarea id="sSystem" rows="7" placeholder="例：あなたは小説家です。ユーザーと対話しながら物語を書きます。"></textarea>
+    <small>空欄なら Modelfile 側の設定のみが使われます。</small>
+  </div>
+  <div class="field">
+    <button id="saveDefaultSysBtn">新規会話の既定にする</button>
+  </div>
+
+  <h4>生成パラメータ（全会話共通）</h4>
+  <div class="field">
+    <label>temperature</label>
+    <div class="row"><input type="range" id="rTemp" min="0" max="2" step="0.05"><input type="number" id="sTemp" min="0" max="2" step="0.05"></div>
+  </div>
+  <div class="field">
+    <label>top_p</label>
+    <div class="row"><input type="range" id="rTopP" min="0" max="1" step="0.01"><input type="number" id="sTopP" min="0" max="1" step="0.01"></div>
+  </div>
+  <div class="field">
+    <label>top_k</label>
+    <div class="row"><input type="range" id="rTopK" min="0" max="200" step="1"><input type="number" id="sTopK" min="0" max="200" step="1"></div>
+  </div>
+  <div class="field">
+    <label>repeat_penalty</label>
+    <div class="row"><input type="range" id="rRep" min="0.8" max="1.5" step="0.01"><input type="number" id="sRep" min="0.8" max="1.5" step="0.01"></div>
+  </div>
+  <div class="field">
+    <label>num_ctx（コンテキスト長）</label>
+    <div class="row"><input type="number" id="sCtx" min="2048" max="131072" step="1024" style="width:120px"></div>
+    <small>変えるとモデルが再ロードされます。16GB VRAM なら 16384〜32768 目安。</small>
+  </div>
+  <div class="field">
+    <label>num_predict（1回の最大出力トークン, -1=無制限）</label>
+    <div class="row"><input type="number" id="sPredict" min="-1" max="32768" step="64" style="width:120px"></div>
+  </div>
+  <div class="field">
+    <button id="resetParamBtn">Modelfile の値に戻す</button>
+  </div>
+
+  <h4>その他</h4>
+  <label class="check"><input type="checkbox" id="sCtrlEnter"> Ctrl+Enter で送信（Enter は改行）</label>
+  <label class="check"><input type="checkbox" id="sThink"> 思考モードを要求（対応モデルのみ）</label>
+  <div class="field">
+    <label>テーマ</label>
+    <select id="sTheme">
+      <option value="">システムに合わせる</option>
+      <option value="light">ライト</option>
+      <option value="dark">ダーク</option>
+    </select>
+  </div>
+  <div class="field">
+    <button id="closeSettingsBtn">閉じる</button>
+  </div>
+</aside>
+
+<script>
+(() => {
+  "use strict";
+
+  // ---------- 既定値 ----------
+  const MODEL_DEFAULTS = { temperature: 1.0, top_p: 0.95, top_k: 64, repeat_penalty: 1.0, num_ctx: 16384, num_predict: -1 };
+  const DEFAULT_SETTINGS = {
+    base: "http://localhost:11434",
+    model: "novel-gemma",
+    options: { ...MODEL_DEFAULTS },
+    defaultSystem: "",
+    ctrlEnter: false,
+    think: false,
+    theme: ""
+  };
+  const LS_SETTINGS = "novelChat.settings";
+  const LS_CONVS = "novelChat.conversations";
+  const LS_CURRENT = "novelChat.current";
+
+  // ---------- 保存まわり ----------
+  function load(key, fallback) {
+    try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; }
+    catch { return fallback; }
+  }
+  function save(key, value) {
+    try { localStorage.setItem(key, JSON.stringify(value)); }
+    catch (e) { console.warn("保存できませんでした", e); }
+  }
+
+  const settings = Object.assign({}, DEFAULT_SETTINGS, load(LS_SETTINGS, {}));
+  settings.options = Object.assign({}, MODEL_DEFAULTS, settings.options || {});
+  let convs = load(LS_CONVS, []);
+  let currentId = load(LS_CURRENT, null);
+
+  const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+  const saveSettings = () => save(LS_SETTINGS, settings);
+  const saveConvs = () => { save(LS_CONVS, convs); save(LS_CURRENT, currentId); };
+
+  function newConv() {
+    const c = { id: uid(), title: "新しい会話", system: settings.defaultSystem, messages: [], created: Date.now(), updated: Date.now() };
+    convs.unshift(c);
+    currentId = c.id;
+    saveConvs();
+    return c;
+  }
+  const cur = () => convs.find(c => c.id === currentId) || null;
+
+  // ---------- DOM ----------
+  const $ = id => document.getElementById(id);
+  const logEl = $("log"), logInner = $("logInner"), input = $("input");
+  const sendBtn = $("sendBtn"), stopBtn = $("stopBtn");
+
+  let busy = false;
+  let controller = null;
+
+  // ---------- 接続 ----------
+  function setStatus(state, text) {
+    $("status").className = state;
+    $("statusText").textContent = text;
+  }
+  const apiBase = () => settings.base.replace(/\/+$/, "");
+
+  async function connect() {
+    setStatus("", "接続中…");
+    try {
+      const res = await fetch(apiBase() + "/api/tags");
+      if (!res.ok) throw new Error("HTTP " + res.status);
+      const data = await res.json();
+      const names = (data.models || []).map(m => m.name);
+      const sel = $("sModel");
+      sel.innerHTML = "";
+      const list = names.slice();
+      if (!list.some(n => n === settings.model || n === settings.model + ":latest")) list.unshift(settings.model);
+      for (const n of list) {
+        const o = document.createElement("option");
+        o.value = n; o.textContent = n;
+        if (n === settings.model || n === settings.model + ":latest") o.selected = true;
+        sel.appendChild(o);
+      }
+      setStatus("ok", settings.model.replace(/:latest$/, ""));
+    } catch (e) {
+      setStatus("ng", "Ollamaに接続できません");
+      const sel = $("sModel");
+      if (!sel.options.length) {
+        const o = document.createElement("option");
+        o.value = settings.model; o.textContent = settings.model;
+        sel.appendChild(o);
+      }
+    }
+  }
+
+  // ---------- 描画 ----------
+  function renderList() {
+    const el = $("convList");
+    el.innerHTML = "";
+    for (const c of convs) {
+      const d = document.createElement("div");
+      d.className = "conv" + (c.id === currentId ? " active" : "");
+      const t = document.createElement("span");
+      t.className = "title"; t.textContent = c.title || "（無題）";
+      const del = document.createElement("button");
+      del.className = "del"; del.textContent = "✕"; del.title = "削除";
+      del.onclick = ev => {
+        ev.stopPropagation();
+        if (busy && c.id === currentId) return;
+        if (!confirm(`「${c.title}」を削除しますか？`)) return;
+        convs = convs.filter(x => x.id !== c.id);
+        if (currentId === c.id) currentId = convs[0]?.id || null;
+        if (!currentId) newConv();
+        saveConvs(); renderAll();
+      };
+      d.onclick = () => {
+        if (busy) return;
+        currentId = c.id; saveConvs(); renderAll();
+        $("side").classList.remove("open");
+      };
+      d.append(t, del);
+      el.appendChild(d);
+    }
+  }
+
+  function renderMessages() {
+    const c = cur();
+    logInner.innerHTML = "";
+    if (!c.messages.length) {
+      const e = document.createElement("div");
+      e.className = "empty";
+      e.innerHTML = "会話を始めましょう。<br>⚙ 設定 でキャラクターや文体をシステムプロンプトに書くと、会話全体に反映されます。";
+      logInner.appendChild(e);
+      return;
+    }
+    c.messages.forEach((m, i) => logInner.appendChild(buildMsg(m, i)));
+  }
+
+  function buildMsg(m, i) {
+    const wrap = document.createElement("div");
+    wrap.className = "msg " + m.role;
+    wrap.dataset.index = i;
+
+    const role = document.createElement("div");
+    role.className = "role";
+    role.textContent = m.role === "user" ? "あなた" : "AI";
+    wrap.appendChild(role);
+
+    const bubble = document.createElement("div");
+    bubble.className = "bubble" + (m.error ? " err" : "");
+    fillBubble(bubble, m);
+    wrap.appendChild(bubble);
+
+    const tools = document.createElement("div");
+    tools.className = "tools";
+    const btn = (label, fn, title) => {
+      const b = document.createElement("button");
+      b.textContent = label; if (title) b.title = title;
+      b.onclick = fn; tools.appendChild(b); return b;
+    };
+    btn("コピー", () => navigator.clipboard?.writeText(m.content));
+    btn("編集", () => startEdit(wrap, i));
+    if (m.role === "assistant") {
+      btn("再生成", () => regenerate(i), "この返答を作り直す");
+      btn("続きを書く", () => continueFrom(i), "この返答の続きを生成");
+    } else {
+      btn("ここから再送", () => resendFrom(i), "この発言以降を消して送り直す");
+    }
+    btn("削除", () => deleteMsg(i)).classList.add("danger");
+    if (m.stats) {
+      const s = document.createElement("span");
+      s.className = "stat"; s.textContent = m.stats;
+      tools.appendChild(s);
+    }
+    wrap.appendChild(tools);
+    return wrap;
+  }
+
+  function fillBubble(bubble, m) {
+    bubble.textContent = "";
+    if (m.thinking) {
+      const d = document.createElement("details");
+      d.className = "think";
+      const s = document.createElement("summary"); s.textContent = "思考過程";
+      const p = document.createElement("div"); p.textContent = m.thinking;
+      d.append(s, p);
+      bubble.appendChild(d);
+    }
+    bubble.appendChild(document.createTextNode(m.content));
+  }
+
+  function renderAll() {
+    const c = cur();
+    renderList();
+    $("convTitle").value = c.title;
+    $("sSystem").value = c.system || "";
+    renderMessages();
+    updateCtxInfo();
+    scrollBottom(true);
+  }
+
+  function nearBottom() { return logEl.scrollHeight - logEl.scrollTop - logEl.clientHeight < 80; }
+  function scrollBottom(force) { if (force || nearBottom()) logEl.scrollTop = logEl.scrollHeight; }
+
+  function updateCtxInfo() {
+    const c = cur();
+    const last = [...c.messages].reverse().find(m => m.promptTokens != null);
+    if (last) {
+      const used = last.promptTokens + (last.evalTokens || 0);
+      const pct = Math.round(used / settings.options.num_ctx * 100);
+      $("ctxInfo").textContent = `コンテキスト使用 約 ${used} / ${settings.options.num_ctx} トークン（${pct}%）` + (pct >= 90 ? " ⚠ 古い内容が切り捨てられます" : "");
+    } else {
+      $("ctxInfo").textContent = "";
+    }
+  }
+
+  function updateKeyHint() {
+    $("keyHint").textContent = settings.ctrlEnter ? "Ctrl+Enter で送信 / Enter で改行" : "Enter で送信 / Shift+Enter で改行";
+  }
+
+  // ---------- 編集・削除 ----------
+  function startEdit(wrap, i) {
+    if (busy) return;
+    const c = cur(), m = c.messages[i];
+    const bubble = wrap.querySelector(".bubble");
+    wrap.classList.add("editing");
+    bubble.textContent = "";
+    const ta = document.createElement("textarea");
+    ta.value = m.content;
+    const row = document.createElement("div");
+    row.style.cssText = "display:flex;gap:6px;margin-top:6px;justify-content:flex-end";
+    const ok = document.createElement("button"); ok.textContent = "保存"; ok.className = "primary";
+    const cancel = document.createElement("button"); cancel.textContent = "キャンセル";
+    row.append(cancel, ok);
+    bubble.append(ta, row);
+    ta.style.height = Math.min(ta.scrollHeight + 10, window.innerHeight * 0.6) + "px";
+    ta.focus();
+    ok.onclick = () => {
+      m.content = ta.value; m.error = false;
+      touch(); renderMessages();
+    };
+    cancel.onclick = () => renderMessages();
+  }
+
+  function deleteMsg(i) {
+    if (busy) return;
+    cur().messages.splice(i, 1);
+    touch(); renderMessages(); updateCtxInfo();
+  }
+
+  function touch() {
+    const c = cur();
+    c.updated = Date.now();
+    convs = [c, ...convs.filter(x => x.id !== c.id)];
+    saveConvs(); renderList();
+  }
+
+  // ---------- 生成 ----------
+  function buildPayloadMessages(c, upto) {
+    const msgs = [];
+    if (c.system && c.system.trim()) msgs.push({ role: "system", content: c.system });
+    for (const m of c.messages.slice(0, upto)) {
+      if (m.error) continue;
+      msgs.push({ role: m.role, content: m.content });
+    }
+    return msgs;
+  }
+
+  function setBusy(b) {
+    busy = b;
+    sendBtn.disabled = b;
+    stopBtn.disabled = !b;
+  }
+
+  // target: 書き込み先のアシスタントメッセージ。history: 送信するメッセージ列
+  async function generate(target, history) {
+    const c = cur();
+    setBusy(true);
+    renderMessages();
+    const idx = c.messages.indexOf(target);
+    const wrap = logInner.querySelector(`.msg[data-index="${idx}"]`);
+    const bubble = wrap.querySelector(".bubble");
+    bubble.classList.add("cursor");
+    scrollBottom(true);
+
+    controller = new AbortController();
+    const body = {
+      model: settings.model,
+      messages: history,
+      stream: true,
+      options: { ...settings.options }
+    };
+    if (settings.think) body.think = true;
+
+    let pending = false;
+    const repaint = () => {
+      if (pending) return;
+      pending = true;
+      requestAnimationFrame(() => { pending = false; fillBubble(bubble, target); scrollBottom(); });
+    };
+
+    try {
+      const res = await fetch(apiBase() + "/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(body),
+        signal: controller.signal
+      });
+      if (!res.ok) {
+        let msg = "HTTP " + res.status;
+        try { const j = await res.json(); if (j.error) msg += "：" + j.error; } catch {}
+        throw new Error(msg);
+      }
+      setStatus("ok", settings.model.replace(/:latest$/, ""));
+      const reader = res.body.getReader();
+      const dec = new TextDecoder();
+      let buf = "";
+      for (;;) {
+        const { value, done } = await reader.read();
+        if (done) break;
+        buf += dec.decode(value, { stream: true });
+        let nl;
+        while ((nl = buf.indexOf("\n")) >= 0) {
+          const line = buf.slice(0, nl).trim();
+          buf = buf.slice(nl + 1);
+          if (!line) continue;
+          const j = JSON.parse(line);
+          if (j.error) throw new Error(j.error);
+          if (j.message) {
+            if (j.message.thinking) target.thinking = (target.thinking || "") + j.message.thinking;
+            if (j.message.content) target.content += j.message.content;
+            repaint();
+          }
+          if (j.done) {
+            target.promptTokens = j.prompt_eval_count ?? null;
+            target.evalTokens = j.eval_count ?? null;
+            if (j.eval_count && j.eval_duration) {
+              const tps = j.eval_count / (j.eval_duration / 1e9);
+              target.stats = `${j.eval_count} トークン・${tps.toFixed(1)} tok/s`;
+            }
+          }
+        }
+      }
+    } catch (e) {
+      if (e.name === "AbortError") {
+        target.stats = "（停止しました）";
+      } else {
+        if (!target.content) { target.content = "エラー：" + e.message; target.error = true; }
+        else target.stats = "（エラーで中断：" + e.message + "）";
+        if (/Failed to fetch|NetworkError/i.test(e.message)) {
+          setStatus("ng", "Ollamaに接続できません");
+          if (target.error) target.content += "\n\nOllama が起動しているか（start-ollama.bat）、OLLAMA_ORIGINS=* が付いているか確認してください。";
+        }
+      }
+    } finally {
+      controller = null;
+      if (!target.content && !target.thinking && !target.error) {
+        // 何も出なかった場合は空メッセージを消す
+        c.messages.splice(c.messages.indexOf(target), 1);
+      }
+      setBusy(false);
+      touch();
+      renderMessages();
+      updateCtxInfo();
+      scrollBottom();
+      input.focus();
+    }
+  }
+
+  function autoTitle(c, text) {
+    if (c.title === "新しい会話" && c.messages.length === 1) {
+      c.title = text.replace(/\s+/g, " ").trim().slice(0, 24) || "新しい会話";
+      $("convTitle").value = c.title;
+    }
+  }
+
+  function send() {
+    if (busy) return;
+    const text = input.value;
+    const c = cur();
+    if (!text.trim()) {
+      // 空送信：最後がユーザー発言なら返答を生成
+      if (c.messages.length && c.messages[c.messages.length - 1].role === "user") {
+        const target = { role: "assistant", content: "" };
+        c.messages.push(target);
+        generate(target, buildPayloadMessages(c, c.messages.length - 1));
+      }
+      return;
+    }
+    c.messages.push({ role: "user", content: text });
+    autoTitle(c, text);
+    input.value = ""; autoGrow();
+    const target = { role: "assistant", content: "" };
+    c.messages.push(target);
+    touch();
+    generate(target, buildPayloadMessages(c, c.messages.length - 1));
+  }
+
+  function regenerate(i) {
+    if (busy) return;
+    const c = cur();
+    c.messages.splice(i);
+    const target = { role: "assistant", content: "" };
+    c.messages.push(target);
+    generate(target, buildPayloadMessages(c, i));
+  }
+
+  function continueFrom(i) {
+    if (busy) return;
+    const c = cur();
+    c.messages.splice(i + 1);
+    const target = c.messages[i];
+    delete target.stats; target.error = false;
+    // 最後をアシスタント発言で終えると、Ollama はその続きから生成する
+    generate(target, buildPayloadMessages(c, i + 1));
+  }
+
+  function resendFrom(i) {
+    if (busy) return;
+    const c = cur();
+    c.messages.splice(i + 1);
+    const target = { role: "assistant", content: "" };
+    c.messages.push(target);
+    generate(target, buildPayloadMessages(c, i + 1));
+  }
+
+  // ---------- 入力欄 ----------
+  function autoGrow() {
+    input.style.height = "auto";
+    input.style.height = Math.min(input.scrollHeight + 2, window.innerHeight * 0.4) + "px";
+  }
+  input.addEventListener("input", autoGrow);
+  input.addEventListener("keydown", e => {
+    if (e.key !== "Enter" || e.isComposing || e.keyCode === 229) return;
+    if (settings.ctrlEnter) {
+      if (e.ctrlKey || e.metaKey) { e.preventDefault(); send(); }
+    } else if (!e.shiftKey) {
+      e.preventDefault(); send();
+    }
+  });
+  sendBtn.onclick = send;
+  stopBtn.onclick = () => controller?.abort();
+  document.addEventListener("keydown", e => {
+    if (e.key === "Escape" && controller) controller.abort();
+  });
+
+  // ---------- サイドバー・上部 ----------
+  $("newBtn").onclick = () => {
+    if (busy) return;
+    newConv(); renderAll(); input.focus();
+    $("side").classList.remove("open");
+  };
+  $("menuBtn").onclick = () => $("side").classList.toggle("open");
+  $("convTitle").addEventListener("change", e => {
+    cur().title = e.target.value.trim() || "（無題）";
+    touch();
+  });
+  $("settingsBtn").onclick = () => $("settings").classList.toggle("open");
+  $("closeSettingsBtn").onclick = () => $("settings").classList.remove("open");
+
+  function download(name, text, type) {
+    const a = document.createElement("a");
+    a.href = URL.createObjectURL(new Blob([text], { type }));
+    a.download = name;
+    a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  }
+  const stamp = () => new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
+  $("exportBtn").onclick = () => download(`novel-chat-${stamp()}.json`, JSON.stringify(convs, null, 2), "application/json");
+  $("txtBtn").onclick = () => {
+    const c = cur();
+    const lines = [];
+    if (c.system) lines.push("【システム】\n" + c.system + "\n");
+    for (const m of c.messages) lines.push((m.role === "user" ? "【あなた】\n" : "【AI】\n") + m.content + "\n");
+    const safe = (c.title || "chat").replace(/[\\/:*?"<>|]/g, "_");
+    download(`${safe}.txt`, lines.join("\n"), "text/plain;charset=utf-8");
+  };
+  $("importBtn").onclick = () => $("importFile").click();
+  $("importFile").onchange = async e => {
+    const f = e.target.files[0];
+    e.target.value = "";
+    if (!f) return;
+    try {
+      const data = JSON.parse(await f.text());
+      const arr = Array.isArray(data) ? data : [data];
+      let n = 0;
+      for (const c of arr) {
+        if (!c || !Array.isArray(c.messages)) continue;
+        const copy = { id: uid(), title: c.title || "読み込んだ会話", system: c.system || "", messages: c.messages, created: c.created || Date.now(), updated: Date.now() };
+        convs.unshift(copy); n++;
+      }
+      if (!n) throw new Error("会話データが見つかりません");
+      currentId = convs[0].id;
+      saveConvs(); renderAll();
+      alert(n + " 件の会話を読み込みました");
+    } catch (err) {
+      alert("読み込みに失敗しました：" + err.message);
+    }
+  };
+
+  // ---------- 設定パネル ----------
+  function bindPair(rangeId, numId, key, parse) {
+    const r = $(rangeId), n = $(numId);
+    const set = v => { r.value = v; n.value = v; };
+    set(settings.options[key]);
+    const on = v => { const p = parse(v); if (!isNaN(p)) { settings.options[key] = p; saveSettings(); } };
+    r.addEventListener("input", () => { n.value = r.value; on(r.value); });
+    n.addEventListener("change", () => { r.value = n.value; on(n.value); });
+    return set;
+  }
+  const setters = {
+    temperature: bindPair("rTemp", "sTemp", "temperature", parseFloat),
+    top_p: bindPair("rTopP", "sTopP", "top_p", parseFloat),
+    top_k: bindPair("rTopK", "sTopK", "top_k", v => parseInt(v, 10)),
+    repeat_penalty: bindPair("rRep", "sRep", "repeat_penalty", parseFloat)
+  };
+  $("sCtx").value = settings.options.num_ctx;
+  $("sCtx").addEventListener("change", e => {
+    const v = parseInt(e.target.value, 10);
+    if (v >= 2048) { settings.options.num_ctx = v; saveSettings(); updateCtxInfo(); }
+  });
+  $("sPredict").value = settings.options.num_predict;
+  $("sPredict").addEventListener("change", e => {
+    const v = parseInt(e.target.value, 10);
+    if (!isNaN(v)) { settings.options.num_predict = v; saveSettings(); }
+  });
+  $("resetParamBtn").onclick = () => {
+    settings.options = { ...MODEL_DEFAULTS };
+    for (const k in setters) setters[k](settings.options[k]);
+    $("sCtx").value = settings.options.num_ctx;
+    $("sPredict").value = settings.options.num_predict;
+    saveSettings(); updateCtxInfo();
+  };
+
+  $("sBase").value = settings.base;
+  $("reconnectBtn").onclick = () => {
+    settings.base = $("sBase").value.trim() || DEFAULT_SETTINGS.base;
+    saveSettings(); connect();
+  };
+  $("sModel").addEventListener("change", e => {
+    settings.model = e.target.value; saveSettings();
+    setStatus("ok", settings.model.replace(/:latest$/, ""));
+  });
+  $("sSystem").addEventListener("input", e => { cur().system = e.target.value; saveConvs(); });
+  $("saveDefaultSysBtn").onclick = () => {
+    settings.defaultSystem = $("sSystem").value; saveSettings();
+    alert("新しい会話の既定のシステムプロンプトにしました");
+  };
+  $("sCtrlEnter").checked = settings.ctrlEnter;
+  $("sCtrlEnter").onchange = e => { settings.ctrlEnter = e.target.checked; saveSettings(); updateKeyHint(); };
+  $("sThink").checked = settings.think;
+  $("sThink").onchange = e => { settings.think = e.target.checked; saveSettings(); };
+
+  function applyTheme() {
+    if (settings.theme) document.documentElement.dataset.theme = settings.theme;
+    else delete document.documentElement.dataset.theme;
+  }
+  $("sTheme").value = settings.theme;
+  $("sTheme").onchange = e => { settings.theme = e.target.value; saveSettings(); applyTheme(); };
+
+  // ---------- 起動 ----------
+  applyTheme();
+  if (!cur()) { if (convs.length) currentId = convs[0].id; else newConv(); }
+  updateKeyHint();
+  renderAll();
+  connect();
+  input.focus();
+})();
+</script>
+</body>
+</html>
