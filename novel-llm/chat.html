@@ -117,6 +117,13 @@
   .tools .stat { font-size: 12px; color: var(--muted); align-self: center; margin-left: 6px; }
   .cursor::after { content: "▍"; animation: blink 1s steps(2) infinite; color: var(--accent); }
   @keyframes blink { 50% { opacity: 0; } }
+  .msg.compressed { opacity: .55; }
+  .summary-bar { margin: 4px 0 18px; border: 1px dashed var(--accent); border-radius: 8px; padding: 6px 12px; font-size: 13px; }
+  .summary-bar summary { cursor: pointer; color: var(--accent); }
+  .summary-bar textarea { width: 100%; min-height: 160px; margin-top: 8px; font-size: 13px; }
+  .summary-bar .row { display: flex; gap: 6px; justify-content: flex-end; margin-top: 6px; }
+  .summary-bar .row button { font-size: 12px; padding: 3px 8px; }
+  #ctxInfo button { font-size: 12px; padding: 1px 8px; margin-left: 6px; }
   .empty { color: var(--muted); text-align: center; margin-top: 15vh; line-height: 2; }
 
   #composer { border-top: 1px solid var(--border); background: var(--panel); padding: 10px 14px 12px; }
@@ -288,6 +295,12 @@
 
   <h4>その他</h4>
   <label class="check"><input type="checkbox" id="sCtrlEnter"> Ctrl+Enter で送信（Enter は改行）</label>
+  <label class="check"><input type="checkbox" id="sAutoCompress"> 会話が長くなったら自動で圧縮（古い部分を要約）</label>
+  <div class="field">
+    <label>圧縮を始めるコンテキスト使用率</label>
+    <div class="row"><input type="range" id="rCompressAt" min="40" max="95" step="5"><input type="number" id="sCompressAt" min="40" max="95" step="5"> %</div>
+    <small>使用量がこれを超えると、古いやり取りを要約して置き換えます。直近のやり取り（num_ctx の約3割）はそのまま残します。</small>
+  </div>
   <label class="check"><input type="checkbox" id="sThink"> 思考モードを要求（対応モデルのみ）</label>
   <div class="field">
     <label>テーマ</label>
@@ -336,7 +349,9 @@
     defaultSystem: PRESETS.chat,
     ctrlEnter: false,
     think: false,
-    theme: ""
+    theme: "",
+    autoCompress: true,
+    compressAt: 70
   };
   const LS_SETTINGS = "novelChat.settings";
   const LS_CONVS = "novelChat.conversations";
@@ -470,7 +485,34 @@
       logInner.appendChild(e);
       return;
     }
-    c.messages.forEach((m, i) => logInner.appendChild(buildMsg(m, i)));
+    c.messages.forEach((m, i) => {
+      if (c.summary && i === c.summaryUpto) logInner.appendChild(buildSummaryBar(c));
+      const el = buildMsg(m, i);
+      if (c.summary && i < c.summaryUpto) el.classList.add("compressed");
+      logInner.appendChild(el);
+    });
+  }
+
+  function buildSummaryBar(c) {
+    const d = document.createElement("details");
+    d.className = "summary-bar";
+    const s = document.createElement("summary");
+    s.textContent = `📦 ここより上の ${c.summaryUpto} 件は要約済みです（AIには要約だけが渡ります）。クリックで要約を表示・編集`;
+    const ta = document.createElement("textarea");
+    ta.value = c.summary;
+    const row = document.createElement("div");
+    row.className = "row";
+    const saveB = document.createElement("button"); saveB.textContent = "要約を保存"; saveB.className = "primary";
+    const undoB = document.createElement("button"); undoB.textContent = "圧縮を解除";
+    saveB.onclick = () => { if (busy) return; c.summary = ta.value; touch(); };
+    undoB.onclick = () => {
+      if (busy) return;
+      if (!confirm("要約をやめて、全部のやり取りをそのままAIに渡す状態に戻しますか？")) return;
+      clearSummary(c); touch(); renderMessages(); updateCtxInfo();
+    };
+    row.append(undoB, saveB);
+    d.append(s, ta, row);
+    return d;
   }
 
   function buildMsg(m, i) {
@@ -563,13 +605,24 @@
 
   function updateCtxInfo() {
     const c = cur();
-    const last = [...c.messages].reverse().find(m => m.promptTokens != null);
-    if (last) {
-      const used = last.promptTokens + (last.evalTokens || 0);
-      const pct = Math.round(used / settings.options.num_ctx * 100);
-      $("ctxInfo").textContent = `コンテキスト使用 約 ${used} / ${settings.options.num_ctx} トークン（${pct}%）` + (pct >= 90 ? " ⚠ 古い内容が切り捨てられます" : "");
-    } else {
-      $("ctxInfo").textContent = "";
+    const el = $("ctxInfo");
+    if (compressing) return;
+    el.textContent = "";
+    let used = c.ctxUsed;
+    if (used == null) {
+      const last = [...c.messages].reverse().find(m => m.promptTokens != null);
+      if (last) used = last.promptTokens + (last.evalTokens || 0);
+    }
+    if (used == null) return;
+    const pct = Math.round(used / settings.options.num_ctx * 100);
+    el.textContent = `コンテキスト使用 約 ${used} / ${settings.options.num_ctx} トークン（${pct}%）` +
+      (c.summary ? "・圧縮済み" : "") + (pct >= 90 ? " ⚠ 古い内容が切り捨てられます" : "");
+    if (c.messages.length >= 4) {
+      const b = document.createElement("button");
+      b.textContent = "今すぐ圧縮";
+      b.title = "古いやり取りを要約して、コンテキストを空ける";
+      b.onclick = () => { if (!busy) compressNow(); };
+      el.appendChild(b);
     }
   }
 
@@ -603,7 +656,9 @@
 
   function deleteMsg(i) {
     if (busy) return;
-    cur().messages.splice(i, 1);
+    const c = cur();
+    c.messages.splice(i, 1);
+    if (c.summary && i < c.summaryUpto) { c.summaryUpto--; if (c.summaryUpto <= 0) clearSummary(c); }
     touch(); renderMessages(); updateCtxInfo();
   }
 
@@ -625,8 +680,15 @@
 
   function buildPayloadMessages(c, upto) {
     const msgs = [];
-    if (c.system && c.system.trim()) msgs.push({ role: "system", content: c.system });
-    for (const m of c.messages.slice(0, upto)) {
+    const useSummary = !!c.summary && upto > c.summaryUpto;
+    let sys = (c.system || "").trim();
+    if (useSummary) {
+      sys = (sys ? sys + "\n\n" : "") +
+        "【これまでの会話の要約】\n" + c.summary.trim() +
+        "\n\n（この要約は、ここより前の会話を縮めたものです。この続きの会話が下に続きます。）";
+    }
+    if (sys) msgs.push({ role: "system", content: sys });
+    for (const m of c.messages.slice(useSummary ? c.summaryUpto : 0, upto)) {
       if (m.error) continue;
       const msg = { role: m.role, content: contentWithFiles(m) };
       if (m.images && m.images.length) msg.images = m.images.map(i => i.data);
@@ -703,6 +765,11 @@
           if (j.done) {
             target.promptTokens = j.prompt_eval_count ?? null;
             target.evalTokens = j.eval_count ?? null;
+            if (j.prompt_eval_count) {
+              c.ctxUsed = j.prompt_eval_count + (j.eval_count || 0);
+              const chars = payloadChars(history);
+              if (chars > 200) c.tokRatio = Math.min(3, Math.max(0.3, j.prompt_eval_count / chars));
+            }
             if (j.eval_count && j.eval_duration) {
               const tps = j.eval_count / (j.eval_duration / 1e9);
               target.stats = `${j.eval_count} トークン・${tps.toFixed(1)} tok/s`;
@@ -736,6 +803,150 @@
     }
   }
 
+  // ---------- 会話の自動圧縮 ----------
+  let compressing = false;
+  const SUMMARY_SYSTEM = n => [
+    "あなたは会話の記録係です。この会話をあとで続けるための要約を、日本語で作ります。",
+    "",
+    "- 必ず残すもの：登場人物（名前・性格・口調・関係）、世界観や設定、決まった事柄、ユーザーの指示や好み（文体・やってほしくないことなど）、話題や物語の進み具合、未解決の事柄や伏線、直近の状況。",
+    "- 小説を書いている場合は、あらすじを時系列で書き、直近の場面は具体的に（場所・時間・誰がいて何をしているか、文体・視点・人称）書く。",
+    "- 前の要約がある場合は、その内容を消さずに新しい内容と統合する。",
+    "- 挨拶、重複、どうでもいい雑談は省く。",
+    `- 箇条書きで、全体で${n}字以内にする。要約だけを出力し、前置きや後書きは書かない。`
+  ].join("\n");
+
+  const msgText = m => contentWithFiles(m) + ((m.images && m.images.length) ? `\n［画像 ${m.images.length} 枚］` : "");
+  const payloadChars = msgs => msgs.reduce((n, m) => n + m.content.length + 8, 0);
+  const estTokens = (c, chars) => Math.ceil(chars * (c.tokRatio || 1.0));
+
+  function clearSummary(c) { delete c.summary; delete c.summaryUpto; delete c.ctxUsed; }
+  function fixSummary(c) {
+    // 要約済みの範囲まで消したら、要約も無効にする
+    if (c.summary && c.summaryUpto >= c.messages.length) clearSummary(c);
+  }
+
+  async function summarize(c, prev, msgs, signal) {
+    const transcript = msgs.map(m => (m.role === "user" ? "ユーザー：" : "AI：") + msgText(m)).join("\n\n");
+    const n = Math.max(800, Math.round(settings.options.num_ctx * 0.12));
+    const body = {
+      model: settings.model,
+      stream: false,
+      messages: [
+        { role: "system", content: SUMMARY_SYSTEM(n) },
+        { role: "user", content: (prev ? "【これまでの要約】\n" + prev + "\n\n" : "") +
+            "【新しい会話の記録】\n" + transcript +
+            "\n\n上の内容をすべて統合した、新しい要約を書いてください。" }
+      ],
+      options: { ...settings.options, temperature: 0.3, num_predict: Math.round(n * 1.5) }
+    };
+    const res = await fetch(apiBase() + "/api/chat", {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body), signal
+    });
+    const j = await res.json().catch(() => ({}));
+    if (!res.ok || j.error) throw new Error(j.error || "HTTP " + res.status);
+    const out = (j.message && j.message.content || "").trim();
+    if (!out) throw new Error("要約が空でした");
+    return out;
+  }
+
+  // upto より前のメッセージを対象に、必要なら古い部分を要約に置き換える
+  async function maybeCompress(c, upto, force) {
+    const ctx = settings.options.num_ctx;
+    const limit = ctx * settings.compressAt / 100;
+    const reserve = Math.min(2048, ctx * 0.1); // 返答のための余白
+    const est = estTokens(c, payloadChars(buildPayloadMessages(c, upto)));
+    if (!force && est + reserve < limit) return false;
+
+    // 直近のやり取り（num_ctx の約3割、最低2件）は残す
+    const start = c.summary ? c.summaryUpto : 0;
+    const keepBudget = ctx * 0.3;
+    let keepFrom = upto, tail = 0;
+    while (keepFrom > start) {
+      const t = estTokens(c, msgText(c.messages[keepFrom - 1]).length);
+      if (upto - keepFrom >= 2 && tail + t > keepBudget) break;
+      tail += t; keepFrom--;
+    }
+    if (keepFrom <= start) {
+      if (force) alert("圧縮できる古いやり取りがありません。直近のやり取りや添付ファイルが大きすぎる場合は、num_ctx を増やすか、添付を減らしてください。");
+      return false;
+    }
+
+    compressing = true;
+    const prevBusy = busy;
+    setBusy(true);
+    controller = new AbortController();
+    const el = $("ctxInfo");
+    try {
+      let summary = c.summary || "";
+      const chunkBudget = ctx * 0.5 - estTokens(c, summary.length);
+      let i = start, round = 0;
+      while (i < keepFrom) {
+        // 一度に要約する量を、コンテキストの半分程度までに抑える
+        let j = i, size = 0;
+        while (j < keepFrom) {
+          const t = estTokens(c, msgText(c.messages[j]).length);
+          if (j > i && size + t > chunkBudget) break;
+          size += t; j++;
+        }
+        round++;
+        el.textContent = `🗜 会話を圧縮しています…（${round} 回目・${j - start}/${keepFrom - start} 件）`;
+        let chunk = c.messages.slice(i, j);
+        if (size > chunkBudget) {
+          // 1件だけで大きすぎるときは、前後を残して中を省く
+          const m = chunk[0], text = msgText(m);
+          const keep = Math.floor(chunkBudget / (c.tokRatio || 1) / 2);
+          chunk = [{ role: m.role, content: text.slice(0, keep) + "\n……（中略）……\n" + text.slice(-keep) }];
+        }
+        summary = await summarize(c, summary, chunk, controller.signal);
+        i = j;
+      }
+      c.summary = summary;
+      c.summaryUpto = keepFrom;
+      c.ctxUsed = estTokens(c, payloadChars(buildPayloadMessages(c, upto)));
+      touch();
+      return true;
+    } catch (e) {
+      if (e.name === "AbortError") return "aborted";
+      alert("会話の圧縮に失敗しました：" + e.message + "\n（圧縮せずに続けます）");
+      return false;
+    } finally {
+      compressing = false;
+      controller = null;
+      setBusy(prevBusy);
+      renderMessages();
+      updateCtxInfo();
+    }
+  }
+
+  // 生成の前後で、必要なら自動圧縮する
+  async function runGeneration(target, upto) {
+    const c = cur();
+    if (settings.autoCompress) {
+      setBusy(true);
+      renderMessages();
+      const r = await maybeCompress(c, upto, false);
+      setBusy(false);
+      if (r === "aborted") {
+        // 停止ボタンで止めたら、返答の生成もしない
+        if (!target.content) c.messages.splice(c.messages.indexOf(target), 1);
+        touch(); renderMessages(); updateCtxInfo();
+        return;
+      }
+    }
+    await generate(target, buildPayloadMessages(c, upto));
+    // 返答後に上限を超えていたら、次の送信に備えて今のうちに圧縮しておく
+    if (settings.autoCompress && !busy && c.ctxUsed != null &&
+        c.ctxUsed > settings.options.num_ctx * settings.compressAt / 100) {
+      await maybeCompress(c, c.messages.length, true);
+    }
+  }
+
+  async function compressNow() {
+    const c = cur();
+    await maybeCompress(c, c.messages.length, true);
+  }
+
   function autoTitle(c, text) {
     if (c.title === "新しい会話" && c.messages.length === 1) {
       c.title = text.replace(/\s+/g, " ").trim().slice(0, 24) || "新しい会話";
@@ -754,7 +965,7 @@
       if (c.messages.length && c.messages[c.messages.length - 1].role === "user") {
         const target = { role: "assistant", content: "" };
         c.messages.push(target);
-        generate(target, buildPayloadMessages(c, c.messages.length - 1));
+        runGeneration(target, c.messages.length - 1);
       }
       return;
     }
@@ -770,35 +981,38 @@
     const target = { role: "assistant", content: "" };
     c.messages.push(target);
     touch();
-    generate(target, buildPayloadMessages(c, c.messages.length - 1));
+    runGeneration(target, c.messages.length - 1);
   }
 
   function regenerate(i) {
     if (busy) return;
     const c = cur();
     c.messages.splice(i);
+    fixSummary(c);
     const target = { role: "assistant", content: "" };
     c.messages.push(target);
-    generate(target, buildPayloadMessages(c, i));
+    runGeneration(target, i);
   }
 
   function continueFrom(i) {
     if (busy) return;
     const c = cur();
     c.messages.splice(i + 1);
+    fixSummary(c);
     const target = c.messages[i];
     delete target.stats; target.error = false;
     // 最後をアシスタント発言で終えると、Ollama はその続きから生成する
-    generate(target, buildPayloadMessages(c, i + 1));
+    runGeneration(target, i + 1);
   }
 
   function resendFrom(i) {
     if (busy) return;
     const c = cur();
     c.messages.splice(i + 1);
+    fixSummary(c);
     const target = { role: "assistant", content: "" };
     c.messages.push(target);
-    generate(target, buildPayloadMessages(c, i + 1));
+    runGeneration(target, i + 1);
   }
 
   // ---------- 入力欄 ----------
@@ -956,6 +1170,12 @@
   };
   $("sCtrlEnter").checked = settings.ctrlEnter;
   $("sCtrlEnter").onchange = e => { settings.ctrlEnter = e.target.checked; saveSettings(); updateKeyHint(); };
+  $("sAutoCompress").checked = settings.autoCompress;
+  $("sAutoCompress").onchange = e => { settings.autoCompress = e.target.checked; saveSettings(); };
+  $("rCompressAt").value = $("sCompressAt").value = settings.compressAt;
+  const onCompressAt = v => { v = parseInt(v, 10); if (v >= 40 && v <= 95) { settings.compressAt = v; saveSettings(); } };
+  $("rCompressAt").addEventListener("input", e => { $("sCompressAt").value = e.target.value; onCompressAt(e.target.value); });
+  $("sCompressAt").addEventListener("change", e => { $("rCompressAt").value = e.target.value; onCompressAt(e.target.value); });
   $("sThink").checked = settings.think;
   $("sThink").onchange = e => { settings.think = e.target.checked; saveSettings(); };
 
