@@ -69,6 +69,14 @@
   .conv .title { flex: 1; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
   .conv .del { border: none; padding: 0 4px; color: var(--muted); visibility: hidden; }
   .conv:hover .del { visibility: visible; }
+  #autosave { padding: 10px 12px; border-top: 1px solid var(--border); font-size: 13px; }
+  #autosave .as-title { font-weight: 600; margin-bottom: 4px; }
+  #asState { color: var(--muted); margin-bottom: 6px; word-break: break-all; }
+  #asState.ok { color: var(--ok); }
+  #asState.ng { color: var(--danger); }
+  #autosave .as-btns { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 6px; }
+  #autosave button { font-size: 12px; padding: 3px 8px; }
+  #autosave .check { margin: 0; }
   #side footer { padding: 10px 12px; border-top: 1px solid var(--border); display: flex; gap: 6px; flex-wrap: wrap; }
   #side footer button { font-size: 13px; padding: 4px 8px; }
 
@@ -148,6 +156,17 @@
     <button class="primary" id="newBtn">＋ 新しい会話</button>
   </header>
   <div id="convList"></div>
+  <div id="autosave">
+    <div class="as-title">ファイルへの自動保存</div>
+    <div id="asState">未設定</div>
+    <div class="as-btns">
+      <button id="asPickBtn">保存フォルダを選ぶ</button>
+      <button id="asResumeBtn" hidden>自動保存を再開</button>
+      <button id="asRestoreBtn" hidden title="フォルダ内の会話ファイルを一覧に読み込む">フォルダから復元</button>
+      <button id="asOffBtn" hidden>解除</button>
+    </div>
+    <label class="check"><input type="checkbox" id="asTxt"> TXTも一緒に保存</label>
+  </div>
   <footer>
     <button id="exportBtn" title="全会話をJSONで保存">書き出し</button>
     <button id="importBtn" title="JSONから読み込み">読み込み</button>
@@ -500,6 +519,7 @@
     c.updated = Date.now();
     convs = [c, ...convs.filter(x => x.id !== c.id)];
     saveConvs(); renderList();
+    queueFileSave(c.id);
   }
 
   // ---------- 生成 ----------
@@ -714,13 +734,16 @@
   }
   const stamp = () => new Date().toISOString().slice(0, 16).replace(/[-:T]/g, "");
   $("exportBtn").onclick = () => download(`novel-chat-${stamp()}.json`, JSON.stringify(convs, null, 2), "application/json");
-  $("txtBtn").onclick = () => {
-    const c = cur();
+  function convToText(c) {
     const lines = [];
     if (c.system) lines.push("【システム】\n" + c.system + "\n");
     for (const m of c.messages) lines.push((m.role === "user" ? "【あなた】\n" : "【AI】\n") + m.content + "\n");
-    const safe = (c.title || "chat").replace(/[\\/:*?"<>|]/g, "_");
-    download(`${safe}.txt`, lines.join("\n"), "text/plain;charset=utf-8");
+    return lines.join("\n");
+  }
+  const safeName = t => (t || "chat").replace(/[\\/:*?"<>|\r\n\t]/g, "_").replace(/[. ]+$/, "").slice(0, 40) || "chat";
+  $("txtBtn").onclick = () => {
+    const c = cur();
+    download(`${safeName(c.title)}.txt`, convToText(c), "text/plain;charset=utf-8");
   };
   $("importBtn").onclick = () => $("importFile").click();
   $("importFile").onchange = async e => {
@@ -735,6 +758,7 @@
         if (!c || !Array.isArray(c.messages)) continue;
         const copy = { id: uid(), title: c.title || "読み込んだ会話", system: c.system || "", messages: c.messages, created: c.created || Date.now(), updated: Date.now() };
         convs.unshift(copy); n++;
+        queueFileSave(copy.id);
       }
       if (!n) throw new Error("会話データが見つかりません");
       currentId = convs[0].id;
@@ -788,7 +812,7 @@
     settings.model = e.target.value; saveSettings();
     setStatus("ok", settings.model.replace(/:latest$/, ""));
   });
-  $("sSystem").addEventListener("input", e => { cur().system = e.target.value; saveConvs(); });
+  $("sSystem").addEventListener("input", e => { cur().system = e.target.value; saveConvs(); queueFileSave(currentId); });
   $("saveDefaultSysBtn").onclick = () => {
     settings.defaultSystem = $("sSystem").value; saveSettings();
     alert("新しい会話の既定のシステムプロンプトにしました");
@@ -805,12 +829,175 @@
   $("sTheme").value = settings.theme;
   $("sTheme").onchange = e => { settings.theme = e.target.value; saveSettings(); applyTheme(); };
 
+  // ---------- フォルダへの自動保存 ----------
+  // 選んだフォルダのハンドルは IndexedDB に保存し、次回起動時に再利用する
+  const fsSupported = "showDirectoryPicker" in window;
+  let dirHandle = null;
+  let dirReady = false;
+  const dirtyIds = new Set();
+  let flushTimer = null;
+
+  function idb(mode, fn) {
+    return new Promise((resolve, reject) => {
+      const open = indexedDB.open("novelChat", 1);
+      open.onupgradeneeded = () => open.result.createObjectStore("kv");
+      open.onerror = () => reject(open.error);
+      open.onsuccess = () => {
+        const tx = open.result.transaction("kv", mode);
+        const req = fn(tx.objectStore("kv"));
+        tx.oncomplete = () => resolve(req && req.result);
+        tx.onerror = () => reject(tx.error);
+      };
+    });
+  }
+  const idbGet = k => idb("readonly", s => s.get(k));
+  const idbSet = (k, v) => idb("readwrite", s => s.put(v, k));
+  const idbDel = k => idb("readwrite", s => s.delete(k));
+
+  function setAsState(cls, text) {
+    const el = $("asState");
+    el.className = cls; el.textContent = text;
+    const has = !!dirHandle;
+    $("asPickBtn").textContent = has ? "フォルダを変更" : "保存フォルダを選ぶ";
+    $("asResumeBtn").hidden = !has || dirReady;
+    $("asRestoreBtn").hidden = !has || !dirReady;
+    $("asOffBtn").hidden = !has;
+  }
+
+  async function ensurePermission(ask) {
+    const opts = { mode: "readwrite" };
+    if (await dirHandle.queryPermission(opts) === "granted") return true;
+    if (!ask) return false;
+    return (await dirHandle.requestPermission(opts)) === "granted";
+  }
+
+  async function activateDir(ask) {
+    try {
+      dirReady = await ensurePermission(ask);
+    } catch { dirReady = false; }
+    if (dirReady) {
+      setAsState("ok", "保存先：" + dirHandle.name);
+      convs.forEach(c => dirtyIds.add(c.id));
+      flushFiles();
+    } else {
+      setAsState("ng", "「" + dirHandle.name + "」への保存を再開するにはボタンを押してください");
+    }
+  }
+
+  function queueFileSave(id) {
+    if (!id) return;
+    dirtyIds.add(id);
+    if (!dirReady) return;
+    clearTimeout(flushTimer);
+    flushTimer = setTimeout(flushFiles, 600);
+  }
+
+  async function writeFile(name, text) {
+    const fh = await dirHandle.getFileHandle(name, { create: true });
+    const w = await fh.createWritable();
+    await w.write(text);
+    await w.close();
+  }
+
+  let flushing = false;
+  async function flushFiles() {
+    if (!dirReady || flushing) return;
+    flushing = true;
+    try {
+      while (dirtyIds.size) {
+        const id = dirtyIds.values().next().value;
+        dirtyIds.delete(id);
+        const c = convs.find(x => x.id === id);
+        if (!c || !c.messages.length) continue; // 空の会話はファイルにしない
+        const base = `${safeName(c.title)}_${c.id}`;
+        await writeFile(base + ".json", JSON.stringify(c, null, 2));
+        if (settings.autoTxt) await writeFile(base + ".txt", convToText(c));
+        // タイトルを変えたら古い名前のファイルを消す
+        if (c.fileBase && c.fileBase !== base) {
+          for (const ext of [".json", ".txt"]) {
+            try { await dirHandle.removeEntry(c.fileBase + ext); } catch {}
+          }
+        }
+        if (c.fileBase !== base) { c.fileBase = base; save(LS_CONVS, convs); }
+      }
+      const t = new Date();
+      setAsState("ok", `保存先：${dirHandle.name}（${t.getHours()}:${String(t.getMinutes()).padStart(2, "0")}:${String(t.getSeconds()).padStart(2, "0")} 保存）`);
+    } catch (e) {
+      if (e.name === "NotAllowedError" || e.name === "SecurityError") {
+        dirReady = false;
+        setAsState("ng", "保存の許可が切れました。「自動保存を再開」を押してください");
+      } else {
+        setAsState("ng", "保存に失敗しました：" + e.message);
+      }
+    } finally {
+      flushing = false;
+      if (dirReady && dirtyIds.size) queueFileSave(dirtyIds.values().next().value);
+    }
+  }
+
+  $("asPickBtn").onclick = async () => {
+    try {
+      dirHandle = await window.showDirectoryPicker({ id: "novelChat", mode: "readwrite" });
+    } catch { return; }
+    await idbSet("dir", dirHandle).catch(() => {});
+    await activateDir(true);
+  };
+  $("asResumeBtn").onclick = () => activateDir(true);
+  $("asOffBtn").onclick = async () => {
+    if (!confirm("フォルダへの自動保存を解除しますか？（保存済みのファイルは残ります）")) return;
+    dirHandle = null; dirReady = false;
+    await idbDel("dir").catch(() => {});
+    setAsState("", "未設定");
+  };
+  $("asRestoreBtn").onclick = async () => {
+    if (busy) return;
+    let added = 0, updated = 0;
+    try {
+      for await (const [name, h] of dirHandle.entries()) {
+        if (h.kind !== "file" || !name.endsWith(".json")) continue;
+        let c;
+        try { c = JSON.parse(await (await h.getFile()).text()); } catch { continue; }
+        if (!c || !c.id || !Array.isArray(c.messages)) continue;
+        const i = convs.findIndex(x => x.id === c.id);
+        if (i < 0) { convs.push(c); added++; }
+        else if ((c.updated || 0) > (convs[i].updated || 0)) { convs[i] = c; updated++; }
+      }
+    } catch (e) {
+      alert("復元に失敗しました：" + e.message);
+      return;
+    }
+    if (added) convs = convs.filter(c => c.messages.length || (c.system && c.system.trim()) || c.title !== "新しい会話");
+    if (!convs.length) newConv();
+    convs.sort((a, b) => (b.updated || 0) - (a.updated || 0));
+    if (!cur()) currentId = convs[0].id;
+    saveConvs(); renderAll();
+    alert(`追加 ${added} 件・更新 ${updated} 件`);
+  };
+  $("asTxt").checked = !!settings.autoTxt;
+  $("asTxt").onchange = e => {
+    settings.autoTxt = e.target.checked; saveSettings();
+    convs.forEach(c => dirtyIds.add(c.id));
+    if (dirReady) flushFiles();
+  };
+
+  async function initAutoSave() {
+    if (!fsSupported) {
+      $("asPickBtn").disabled = true;
+      setAsState("", "このブラウザは非対応です（Chrome か Edge で開いてください）。ブラウザ内には自動保存されています。");
+      return;
+    }
+    try { dirHandle = await idbGet("dir") || null; } catch { dirHandle = null; }
+    if (dirHandle) await activateDir(false);
+    else setAsState("", "未設定（ブラウザ内には自動保存されています）");
+  }
+
   // ---------- 起動 ----------
   applyTheme();
   if (!cur()) { if (convs.length) currentId = convs[0].id; else newConv(); }
   updateKeyHint();
   renderAll();
   connect();
+  initAutoSave();
   input.focus();
 })();
 </script>
