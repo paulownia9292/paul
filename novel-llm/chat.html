@@ -87,6 +87,7 @@
     border-bottom: 1px solid var(--border); background: var(--panel);
   }
   #convTitle { flex: 1; font-weight: 600; border: 1px solid transparent; background: transparent; min-width: 0; }
+  #modeSel { padding: 4px 6px; }
   #convTitle:hover, #convTitle:focus { border-color: var(--border); }
   #status { font-size: 13px; color: var(--muted); display: flex; align-items: center; gap: 6px; white-space: nowrap; }
   #status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
@@ -179,6 +180,11 @@
   <div id="top">
     <button id="menuBtn">☰</button>
     <input type="text" id="convTitle" placeholder="会話タイトル">
+    <select id="modeSel" title="会話モード（システムプロンプト）">
+      <option value="chat">💬 対話</option>
+      <option value="novel">📖 小説執筆</option>
+      <option value="custom">✎ カスタム</option>
+    </select>
     <div id="status"><span class="dot"></span><span id="statusText">未接続</span></div>
     <button id="settingsBtn">⚙ 設定</button>
   </div>
@@ -215,8 +221,8 @@
 
   <h4>この会話のシステムプロンプト</h4>
   <div class="field">
-    <textarea id="sSystem" rows="7" placeholder="例：あなたは小説家です。ユーザーと対話しながら物語を書きます。"></textarea>
-    <small>空欄なら Modelfile 側の設定のみが使われます。</small>
+    <textarea id="sSystem" rows="9" placeholder="AIの役割・口調・ルールなどを書きます"></textarea>
+    <small>上部のモード切替で「対話」「小説執筆」のひな形に切り替えられます。ここに何か書いてあると Modelfile の SYSTEM より優先されます。空欄なら Modelfile の SYSTEM が使われます。</small>
   </div>
   <div class="field">
     <button id="saveDefaultSysBtn">新規会話の既定にする</button>
@@ -274,11 +280,32 @@
 
   // ---------- 既定値 ----------
   const MODEL_DEFAULTS = { temperature: 1.0, top_p: 0.95, top_k: 64, repeat_penalty: 1.0, num_ctx: 16384, num_predict: -1 };
+  // 会話モードのひな形（システムプロンプト）
+  const PRESETS = {
+    chat: [
+      "あなたは親切で率直な対話AIアシスタントです。ユーザーと自然に会話し、質問には分かりやすく正確に答えてください。",
+      "",
+      "- 普段は、雑談・質問への回答・相談・説明・調べものの手伝いなど、普通の会話をします。",
+      "- 小説・物語・詩・ロールプレイなどの創作は、ユーザーが「小説を書いて」「物語を作って」「続きを書いて」などとはっきり頼んだときだけ行ってください。頼まれていないのに、返答を物語風・小説風にしてはいけません。",
+      "- 創作を頼まれたときはそれに全力で応え、その後また普通の会話に戻ってかまいません。",
+      "- 返答は日本語で、内容に合った長さにしてください。短い問いかけには短く返します。",
+      "- 分からないことは分からないと言い、推測で事実を作らないでください。"
+    ].join("\n"),
+    novel: [
+      "あなたは小説家です。ユーザーと相談しながら小説を書きます。",
+      "",
+      "- 情景描写と心理描写を丁寧に、会話文は「」で書きます。",
+      "- ユーザーが設定・展開・文体を指示したら、それに従います。",
+      "- 「続けて」と言われたら、直前の場面から自然に続けます。",
+      "- 本文以外の前置きや解説は、求められない限り書きません。"
+    ].join("\n")
+  };
+
   const DEFAULT_SETTINGS = {
     base: "http://localhost:11434",
     model: "novel-gemma",
     options: { ...MODEL_DEFAULTS },
-    defaultSystem: "",
+    defaultSystem: PRESETS.chat,
     ctrlEnter: false,
     think: false,
     theme: ""
@@ -301,6 +328,15 @@
   settings.options = Object.assign({}, MODEL_DEFAULTS, settings.options || {});
   let convs = load(LS_CONVS, []);
   let currentId = load(LS_CURRENT, null);
+
+  // 旧版からの移行：空のシステムプロンプト（＝Modelfile 任せ）を「対話」モードにする
+  if (settings.presetVersion !== 1) {
+    if (!settings.defaultSystem) settings.defaultSystem = PRESETS.chat;
+    for (const c of convs) if (!c.system) c.system = PRESETS.chat;
+    settings.presetVersion = 1;
+    save(LS_SETTINGS, settings);
+    save(LS_CONVS, convs);
+  }
 
   const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
   const saveSettings = () => save(LS_SETTINGS, settings);
@@ -395,7 +431,7 @@
     if (!c.messages.length) {
       const e = document.createElement("div");
       e.className = "empty";
-      e.innerHTML = "会話を始めましょう。<br>⚙ 設定 でキャラクターや文体をシステムプロンプトに書くと、会話全体に反映されます。";
+      e.innerHTML = "会話を始めましょう。<br>上の「💬 対話 / 📖 小説執筆」でモードを切り替えられます。<br>「対話」モードでは、頼まない限り小説は書きません。";
       logInner.appendChild(e);
       return;
     }
@@ -460,6 +496,7 @@
     renderList();
     $("convTitle").value = c.title;
     $("sSystem").value = c.system || "";
+    updateModeSel();
     renderMessages();
     updateCtxInfo();
     scrollBottom(true);
@@ -812,7 +849,30 @@
     settings.model = e.target.value; saveSettings();
     setStatus("ok", settings.model.replace(/:latest$/, ""));
   });
-  $("sSystem").addEventListener("input", e => { cur().system = e.target.value; saveConvs(); queueFileSave(currentId); });
+  $("sSystem").addEventListener("input", e => { cur().system = e.target.value; saveConvs(); queueFileSave(currentId); updateModeSel(); });
+
+  function modeOf(system) {
+    const t = (system || "").trim();
+    for (const k in PRESETS) if (t === PRESETS[k].trim()) return k;
+    return "custom";
+  }
+  function updateModeSel() { $("modeSel").value = modeOf(cur().system); }
+  $("modeSel").addEventListener("change", e => {
+    const c = cur(), mode = e.target.value;
+    if (mode === "custom") {
+      $("settings").classList.add("open");
+      $("sSystem").focus();
+      return;
+    }
+    if (modeOf(c.system) === "custom" && c.system.trim() &&
+        !confirm("今のシステムプロンプト（カスタム）を「" + e.target.selectedOptions[0].textContent.trim() + "」のひな形に置き換えますか？")) {
+      updateModeSel();
+      return;
+    }
+    c.system = PRESETS[mode];
+    $("sSystem").value = c.system;
+    saveConvs(); queueFileSave(c.id);
+  });
   $("saveDefaultSysBtn").onclick = () => {
     settings.defaultSystem = $("sSystem").value; saveSettings();
     alert("新しい会話の既定のシステムプロンプトにしました");
