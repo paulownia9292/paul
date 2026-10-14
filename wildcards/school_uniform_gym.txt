@@ -1,17 +1,17 @@
-white gym shirt, short sleeves, navy blue trim, white name tag, navy blue track shorts, white socks, white sneakers
-white gym shirt, short sleeves, red trim, white name tag, red track shorts, white socks, white sneakers
-white gym shirt, short sleeves, green trim, white name tag, green track shorts, white socks, white sneakers
-white gym shirt, short sleeves, blue trim, white name tag, blue track shorts, white socks, white sneakers
-white gym shirt, short sleeves, maroon trim, white name tag, maroon track shorts, white socks, white sneakers
-white gym shirt, short sleeves, navy blue trim, white name tag, navy blue buruma, white socks, white sneakers
-white gym shirt, short sleeves, red trim, white name tag, red buruma, white socks, white sneakers
-white gym shirt, short sleeves, green trim, white name tag, green buruma, white socks, white sneakers
-white gym shirt, short sleeves, maroon trim, white name tag, maroon buruma, white socks, white sneakers
-track suit, blue track jacket, white zipper, white stripes, blue track pants, white sneakers
-track suit, navy blue track jacket, white zipper, white stripes, navy blue track pants, white sneakers
-track suit, red track jacket, white zipper, white stripes, red track pants, white sneakers
-track suit, green track jacket, white zipper, white stripes, green track pants, white sneakers
-track suit, maroon track jacket, white zipper, white stripes, maroon track pants, white sneakers
-track suit, black track jacket, white zipper, white stripes, black track pants, white sneakers
-track suit, purple track jacket, white zipper, white stripes, purple track pants, white sneakers
-blue track jacket, open jacket, white gym shirt, blue track shorts, white socks, white sneakers
+white gym shirt, short sleeves, navy blue trim, white name tag, navy blue track shorts, white socks
+white gym shirt, short sleeves, red trim, white name tag, red track shorts, white socks
+white gym shirt, short sleeves, green trim, white name tag, green track shorts, white socks
+white gym shirt, short sleeves, blue trim, white name tag, blue track shorts, white socks
+white gym shirt, short sleeves, maroon trim, white name tag, maroon track shorts, white socks
+white gym shirt, short sleeves, navy blue trim, white name tag, navy blue buruma, white socks
+white gym shirt, short sleeves, red trim, white name tag, red buruma, white socks
+white gym shirt, short sleeves, green trim, white name tag, green buruma, white socks
+white gym shirt, short sleeves, maroon trim, white name tag, maroon buruma, white socks
+track suit, blue track jacket, white zipper, white stripes, blue track pants
+track suit, navy blue track jacket, white zipper, white stripes, navy blue track pants
+track suit, red track jacket, white zipper, white stripes, red track pants
+track suit, green track jacket, white zipper, white stripes, green track pants
+track suit, maroon track jacket, white zipper, white stripes, maroon track pants
+track suit, black track jacket, white zipper, white stripes, black track pants
+track suit, purple track jacket, white zipper, white stripes, purple track pants
+blue track jacket, open jacket, white gym shirt, blue track shorts, white socks

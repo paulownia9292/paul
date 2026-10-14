@@ -1,15 +1,15 @@
-school uniform, navy blue duffel coat, brown toggles, red plaid skirt, black pantyhose, brown loafers
-school uniform, beige duffel coat, brown toggles, navy blue plaid skirt, black pantyhose, brown loafers
-school uniform, red duffel coat, white toggles, grey plaid skirt, black pantyhose, black loafers
-school uniform, navy blue peacoat, navy blue pleated skirt, black pantyhose, brown loafers, brown school bag
-school uniform, beige peacoat, green plaid skirt, black pantyhose, brown loafers, black school bag
-school uniform, black chesterfield coat, grey plaid skirt, black pantyhose, black loafers
-school uniform, grey long coat, red plaid skirt, black pantyhose, black loafers
-school uniform, brown trench coat, brown belt, navy blue plaid skirt, black pantyhose, brown loafers
-school uniform, grey hoodie, hood down, navy blue blazer, open blazer, grey plaid skirt, white loose socks, white sneakers
-school uniform, black hoodie, hood down, black blazer, open blazer, red plaid skirt, black socks, black sneakers
-school uniform, pink hoodie, hood down, beige cardigan, blue plaid skirt, white socks, white sneakers
-school uniform, red track jacket, open jacket, white collared shirt, navy blue plaid skirt, white socks, white sneakers
-gyaru, school uniform, white collared shirt, open collar, red loose necktie, beige cardigan around waist, red plaid skirt, short skirt, white loose socks, brown loafers
-school uniform, navy blue blazer, buttoned blazer, white collared shirt, red neck ribbon, navy blue long skirt, white socks, black loafers, black-framed eyewear
-black serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black long skirt, white socks, white sneakers
+school uniform, navy blue duffel coat, brown toggles, red plaid skirt, black pantyhose
+school uniform, beige duffel coat, brown toggles, navy blue plaid skirt, black pantyhose
+school uniform, red duffel coat, white toggles, grey plaid skirt, black pantyhose
+school uniform, navy blue peacoat, navy blue pleated skirt, black pantyhose, brown school bag
+school uniform, beige peacoat, green plaid skirt, black pantyhose, black school bag
+school uniform, black chesterfield coat, grey plaid skirt, black pantyhose
+school uniform, grey long coat, red plaid skirt, black pantyhose
+school uniform, brown trench coat, brown belt, navy blue plaid skirt, black pantyhose
+school uniform, grey hoodie, hood down, navy blue blazer, open blazer, grey plaid skirt, white loose socks
+school uniform, black hoodie, hood down, black blazer, open blazer, red plaid skirt, black socks
+school uniform, pink hoodie, hood down, beige cardigan, blue plaid skirt, white socks
+school uniform, red track jacket, open jacket, white collared shirt, navy blue plaid skirt, white socks
+gyaru, school uniform, white collared shirt, open collar, red loose necktie, beige cardigan around waist, red plaid skirt, short skirt, white loose socks
+school uniform, navy blue blazer, buttoned blazer, white collared shirt, red neck ribbon, navy blue long skirt, white socks, black-framed eyewear
+black serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black long skirt, white socks

@@ -1,167 +1,167 @@
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, navy blue pleated skirt, white socks, black loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue plaid skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, light blue sailor collar, white stripes, navy blue bow, light blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, light blue sailor collar, navy blue stripes, blue necktie, navy blue pleated skirt, navy blue socks, black loafers
-serafuku, white shirt, short sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, green sailor collar, white stripes, yellow bow, green pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, dark green sailor collar, white stripes, maroon necktie, dark green pleated skirt, black socks, black loafers
-serafuku, white shirt, short sleeves, maroon sailor collar, white stripes, maroon bow, maroon pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, red sailor collar, white stripes, red bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, black sailor collar, white stripes, red bow, black pleated skirt, white socks, black loafers
-serafuku, white shirt, short sleeves, grey sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks, black loafers
-serafuku, white shirt, short sleeves, brown sailor collar, beige stripes, orange bow, brown pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, purple sailor collar, white stripes, pink bow, purple pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, pink sailor collar, white stripes, red bow, pink pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, beige sweater vest, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue long skirt, white socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue pleated skirt, black socks, black loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, navy blue socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, light blue stripes, light blue necktie, navy blue pleated skirt, white socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, black socks, black loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, black pantyhose, black loafers
-serafuku, navy blue shirt, long sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, red plaid skirt, black socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue long skirt, black socks, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black pleated skirt, black pantyhose, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, red stripes, red necktie, black pleated skirt, black socks, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, black pleated skirt, white socks, black loafers
-serafuku, black shirt, long sleeves, white sailor collar, black stripes, black bow, black pleated skirt, black socks, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, black bow, black long skirt, white socks, white sneakers
-serafuku, white shirt, long sleeves, black sailor collar, white stripes, black bow, black pleated skirt, black socks, black loafers
-serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, navy blue necktie, navy blue pleated skirt, navy blue socks, brown loafers
-serafuku, white shirt, long sleeves, light blue sailor collar, white stripes, light blue bow, light blue pleated skirt, white socks, brown loafers
-serafuku, maroon shirt, long sleeves, maroon sailor collar, white stripes, white bow, maroon pleated skirt, black socks, black loafers
-serafuku, maroon shirt, long sleeves, maroon sailor collar, yellow stripes, yellow bow, maroon pleated skirt, black pantyhose, black loafers
-serafuku, grey shirt, long sleeves, grey sailor collar, black stripes, red bow, grey pleated skirt, black pantyhose, black loafers
-serafuku, grey shirt, long sleeves, navy blue sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks, brown loafers
-serafuku, brown shirt, long sleeves, brown sailor collar, white stripes, orange bow, brown pleated skirt, black socks, brown loafers
-serafuku, beige shirt, long sleeves, brown sailor collar, white stripes, brown bow, brown pleated skirt, white socks, brown loafers
-serafuku, dark green shirt, long sleeves, dark green sailor collar, white stripes, white bow, dark green pleated skirt, black socks, black loafers
-serafuku, blue shirt, long sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks, brown loafers
-serafuku, purple shirt, long sleeves, purple sailor collar, white stripes, white bow, purple pleated skirt, black socks, black loafers
-navy blue sailor dress, long sleeves, navy blue sailor collar, white stripes, red bow, brown belt, white socks, brown loafers
-black sailor dress, long sleeves, white sailor collar, black stripes, black bow, black belt, black socks, black loafers
-serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue cardigan, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, beige cardigan, navy blue pleated skirt, white socks, brown loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, white cardigan, black pleated skirt, black pantyhose, black loafers
-school uniform, navy blue blazer, white collared shirt, red necktie, grey plaid skirt, navy blue socks, brown loafers
-school uniform, navy blue blazer, white collared shirt, red neck ribbon, navy blue plaid skirt, white socks, brown loafers
-school uniform, navy blue blazer, white collared shirt, blue necktie, navy blue pleated skirt, black pantyhose, black loafers
-school uniform, navy blue blazer, white collared shirt, green neck ribbon, green plaid skirt, navy blue socks, brown loafers
-school uniform, navy blue blazer, white collared shirt, yellow neck ribbon, navy blue plaid skirt, white socks, brown loafers
-school uniform, navy blue blazer, white trim, white collared shirt, red neck ribbon, red plaid skirt, black socks, black loafers
-school uniform, navy blue blazer, double-breasted, white collared shirt, blue necktie, blue plaid skirt, white socks, brown loafers
-school uniform, navy blue blazer, white collared shirt, red bowtie, navy blue plaid skirt, white socks, brown loafers
-school uniform, black blazer, white collared shirt, green necktie, green plaid skirt, black socks, black loafers
-school uniform, black blazer, white collared shirt, red necktie, black pleated skirt, black pantyhose, black loafers
-school uniform, black blazer, red trim, white collared shirt, red neck ribbon, red plaid skirt, black socks, black loafers
-school uniform, black blazer, white collared shirt, grey necktie, grey plaid skirt, white socks, black loafers
-school uniform, black blazer, white collared shirt, blue neck ribbon, blue plaid skirt, white socks, brown loafers
-school uniform, black blazer, white collared shirt, black bowtie, grey plaid skirt, black socks, black loafers
-school uniform, brown blazer, white collared shirt, red neck ribbon, red plaid skirt, black socks, brown loafers
-school uniform, brown blazer, white collared shirt, green necktie, brown plaid skirt, white socks, brown loafers
-school uniform, beige blazer, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, navy blue socks, brown loafers
-school uniform, beige blazer, white collared shirt, red necktie, red plaid skirt, white socks, brown loafers
-school uniform, beige blazer, white collared shirt, brown neck ribbon, brown plaid skirt, white socks, brown loafers
-school uniform, grey blazer, double-breasted, white collared shirt, green necktie, green plaid skirt, grey socks, black loafers
-school uniform, grey blazer, white collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks, brown loafers
-school uniform, grey blazer, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, grey blazer, white collared shirt, pink neck ribbon, grey plaid skirt, white socks, brown loafers
-school uniform, white blazer, gold trim, white collared shirt, blue neck ribbon, blue plaid skirt, white socks, brown loafers
-school uniform, white blazer, navy blue trim, white collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks, black loafers
-school uniform, white blazer, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, maroon blazer, white collared shirt, grey necktie, grey pleated skirt, black pantyhose, black loafers
-school uniform, maroon blazer, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, white socks, brown loafers
-school uniform, maroon blazer, white collared shirt, black neck ribbon, maroon plaid skirt, black socks, black loafers
-school uniform, dark green blazer, white collared shirt, yellow neck ribbon, green plaid skirt, white socks, brown loafers
-school uniform, dark green blazer, white collared shirt, red necktie, red tartan skirt, black socks, brown loafers
-school uniform, dark green blazer, white collared shirt, navy blue necktie, grey pleated skirt, navy blue socks, black loafers
-school uniform, light blue blazer, white collared shirt, navy blue neck ribbon, blue plaid skirt, white socks, brown loafers
-school uniform, light blue blazer, white collared shirt, red neck ribbon, grey plaid skirt, white socks, brown loafers
-school uniform, blue blazer, white collared shirt, yellow necktie, blue plaid skirt, white socks, brown loafers
-school uniform, purple blazer, white collared shirt, black neck ribbon, purple plaid skirt, black socks, black loafers
-school uniform, purple blazer, white collared shirt, white neck ribbon, grey plaid skirt, white socks, brown loafers
-school uniform, pink blazer, white collared shirt, red neck ribbon, pink plaid skirt, white socks, brown loafers
-school uniform, red blazer, white collared shirt, black neck ribbon, black plaid skirt, black socks, black loafers
-school uniform, navy blue blazer, light blue collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks, brown loafers
-school uniform, navy blue blazer, pink collared shirt, red neck ribbon, grey plaid skirt, white socks, brown loafers
-school uniform, navy blue blazer, open blazer, grey sweater vest, white collared shirt, red necktie, grey plaid skirt, navy blue socks, brown loafers
-school uniform, navy blue blazer, open blazer, beige sweater, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, black blazer, open blazer, grey sweater vest, white collared shirt, blue necktie, black plaid skirt, black socks, black loafers
-school uniform, navy blue blazer, open blazer, navy blue cardigan, white collared shirt, green necktie, green plaid skirt, navy blue socks, brown loafers
-school uniform, brown blazer, open blazer, beige sweater vest, white collared shirt, red neck ribbon, brown plaid skirt, white socks, brown loafers
-school uniform, navy blue blazer, white collared shirt, red necktie, grey plaid pants, navy blue socks, brown loafers
-school uniform, black blazer, white collared shirt, grey necktie, black pants, black socks, black loafers
-school uniform, navy blue blazer, white collared shirt, green neck ribbon, green tartan long skirt, black socks, brown loafers
-school uniform, grey blazer, white collared shirt, navy blue neck ribbon, grey long skirt, white socks, brown loafers
-school uniform, navy blue pinafore dress, white collared shirt, long sleeves, red neck ribbon, black socks, black mary janes
-school uniform, grey pinafore dress, white collared shirt, long sleeves, blue neck ribbon, white socks, brown loafers
-school uniform, black pinafore dress, white collared shirt, long sleeves, black neck ribbon, white socks, black mary janes
-school uniform, maroon pinafore dress, white collared shirt, long sleeves, white neck ribbon, black socks, black loafers
-school uniform, brown pinafore dress, white collared shirt, long sleeves, red neck ribbon, white socks, brown loafers
-school uniform, dark green pinafore dress, white collared shirt, long sleeves, yellow neck ribbon, white socks, brown loafers
-school uniform, navy blue bolero jacket, white blouse, red bow, navy blue pleated skirt, white socks, brown loafers
-school uniform, black bolero jacket, white blouse, white bow, black pleated skirt, black socks, black loafers
-school uniform, grey bolero jacket, white blouse, navy blue bow, grey pleated skirt, white socks, brown loafers
-school uniform, maroon eton jacket, white blouse, round collar, black neck ribbon, maroon pleated skirt, black socks, black loafers
-school uniform, dark green eton jacket, white blouse, round collar, red neck ribbon, dark green pleated skirt, white socks, brown loafers
-school uniform, black dress, long dress, white collar, long sleeves, black neck ribbon, white socks, black mary janes
-school uniform, navy blue dress, white sailor collar, long sleeves, navy blue belt, white socks, black mary janes
-school uniform, grey dress, white collar, long sleeves, red neck ribbon, grey belt, black socks, black loafers
-school uniform, maroon dress, long dress, white collar, long sleeves, white neck ribbon, black socks, black loafers
-school uniform, brown dress, white collar, long sleeves, brown neck ribbon, brown belt, white socks, brown loafers
-school uniform, beige cardigan, white collared shirt, blue neck ribbon, blue plaid skirt, white socks, brown loafers
-school uniform, navy blue cardigan, white collared shirt, red necktie, grey plaid skirt, navy blue socks, brown loafers
-school uniform, pink cardigan, oversized cardigan, sleeves past wrists, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, grey cardigan, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, black socks, black loafers
-school uniform, black cardigan, white collared shirt, red necktie, black plaid skirt, black pantyhose, black loafers
-school uniform, white cardigan, white collared shirt, green neck ribbon, green plaid skirt, white socks, brown loafers
-school uniform, light blue cardigan, white collared shirt, navy blue neck ribbon, navy blue pleated skirt, white socks, brown loafers
-school uniform, navy blue sweater vest, white collared shirt, short sleeves, red necktie, grey plaid skirt, navy blue socks, brown loafers
-school uniform, beige sweater vest, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, grey sweater vest, white collared shirt, short sleeves, blue necktie, blue plaid skirt, white socks, brown loafers
-school uniform, white sweater vest, white collared shirt, short sleeves, green neck ribbon, green plaid skirt, white socks, brown loafers
-school uniform, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, white collared shirt, short sleeves, green necktie, green plaid skirt, white socks, brown loafers
-school uniform, light blue collared shirt, short sleeves, navy blue necktie, navy blue plaid skirt, white socks, brown loafers
-school uniform, white polo shirt, short sleeves, navy blue pleated skirt, white socks, white sneakers
-school uniform, navy blue vest, white collared shirt, short sleeves, red neck ribbon, navy blue pleated skirt, white socks, brown loafers
-school uniform, navy blue sweater, white collared shirt, red necktie, grey plaid skirt, black pantyhose, brown loafers
-school uniform, red sweater, white collared shirt, black neck ribbon, black plaid skirt, black socks, black loafers
-school uniform, beige sweater, white collared shirt, brown neck ribbon, brown plaid skirt, white socks, brown loafers
-school uniform, navy blue duffel coat, brown toggles, red plaid skirt, black pantyhose, brown loafers
-school uniform, beige duffel coat, brown toggles, navy blue plaid skirt, black pantyhose, brown loafers
-school uniform, red duffel coat, white toggles, grey plaid skirt, black pantyhose, black loafers
-school uniform, navy blue peacoat, navy blue pleated skirt, black pantyhose, brown loafers, brown school bag
-school uniform, beige peacoat, green plaid skirt, black pantyhose, brown loafers, black school bag
-school uniform, black chesterfield coat, grey plaid skirt, black pantyhose, black loafers
-school uniform, grey long coat, red plaid skirt, black pantyhose, black loafers
-school uniform, brown trench coat, brown belt, navy blue plaid skirt, black pantyhose, brown loafers
-school uniform, grey hoodie, hood down, navy blue blazer, open blazer, grey plaid skirt, white loose socks, white sneakers
-school uniform, black hoodie, hood down, black blazer, open blazer, red plaid skirt, black socks, black sneakers
-school uniform, pink hoodie, hood down, beige cardigan, blue plaid skirt, white socks, white sneakers
-school uniform, red track jacket, open jacket, white collared shirt, navy blue plaid skirt, white socks, white sneakers
-gyaru, school uniform, white collared shirt, open collar, red loose necktie, beige cardigan around waist, red plaid skirt, short skirt, white loose socks, brown loafers
-school uniform, navy blue blazer, buttoned blazer, white collared shirt, red neck ribbon, navy blue long skirt, white socks, black loafers, black-framed eyewear
-black serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black long skirt, white socks, white sneakers
-white gym shirt, short sleeves, navy blue trim, white name tag, navy blue track shorts, white socks, white sneakers
-white gym shirt, short sleeves, red trim, white name tag, red track shorts, white socks, white sneakers
-white gym shirt, short sleeves, green trim, white name tag, green track shorts, white socks, white sneakers
-white gym shirt, short sleeves, blue trim, white name tag, blue track shorts, white socks, white sneakers
-white gym shirt, short sleeves, maroon trim, white name tag, maroon track shorts, white socks, white sneakers
-white gym shirt, short sleeves, navy blue trim, white name tag, navy blue buruma, white socks, white sneakers
-white gym shirt, short sleeves, red trim, white name tag, red buruma, white socks, white sneakers
-white gym shirt, short sleeves, green trim, white name tag, green buruma, white socks, white sneakers
-white gym shirt, short sleeves, maroon trim, white name tag, maroon buruma, white socks, white sneakers
-track suit, blue track jacket, white zipper, white stripes, blue track pants, white sneakers
-track suit, navy blue track jacket, white zipper, white stripes, navy blue track pants, white sneakers
-track suit, red track jacket, white zipper, white stripes, red track pants, white sneakers
-track suit, green track jacket, white zipper, white stripes, green track pants, white sneakers
-track suit, maroon track jacket, white zipper, white stripes, maroon track pants, white sneakers
-track suit, black track jacket, white zipper, white stripes, black track pants, white sneakers
-track suit, purple track jacket, white zipper, white stripes, purple track pants, white sneakers
-blue track jacket, open jacket, white gym shirt, blue track shorts, white socks, white sneakers
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue plaid skirt, white socks
+serafuku, white shirt, short sleeves, light blue sailor collar, white stripes, navy blue bow, light blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, light blue sailor collar, navy blue stripes, blue necktie, navy blue pleated skirt, navy blue socks
+serafuku, white shirt, short sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, green sailor collar, white stripes, yellow bow, green pleated skirt, white socks
+serafuku, white shirt, short sleeves, dark green sailor collar, white stripes, maroon necktie, dark green pleated skirt, black socks
+serafuku, white shirt, short sleeves, maroon sailor collar, white stripes, maroon bow, maroon pleated skirt, white socks
+serafuku, white shirt, short sleeves, red sailor collar, white stripes, red bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, black sailor collar, white stripes, red bow, black pleated skirt, white socks
+serafuku, white shirt, short sleeves, grey sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks
+serafuku, white shirt, short sleeves, brown sailor collar, beige stripes, orange bow, brown pleated skirt, white socks
+serafuku, white shirt, short sleeves, purple sailor collar, white stripes, pink bow, purple pleated skirt, white socks
+serafuku, white shirt, short sleeves, pink sailor collar, white stripes, red bow, pink pleated skirt, white socks
+serafuku, white shirt, short sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, beige sweater vest, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue long skirt, white socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue pleated skirt, black socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, navy blue socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, light blue stripes, light blue necktie, navy blue pleated skirt, white socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, black socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, black pantyhose
+serafuku, navy blue shirt, long sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, red plaid skirt, black socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue long skirt, black socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black pleated skirt, black pantyhose
+serafuku, black shirt, long sleeves, black sailor collar, red stripes, red necktie, black pleated skirt, black socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, black pleated skirt, white socks
+serafuku, black shirt, long sleeves, white sailor collar, black stripes, black bow, black pleated skirt, black socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, black bow, black long skirt, white socks
+serafuku, white shirt, long sleeves, black sailor collar, white stripes, black bow, black pleated skirt, black socks
+serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, navy blue necktie, navy blue pleated skirt, navy blue socks
+serafuku, white shirt, long sleeves, light blue sailor collar, white stripes, light blue bow, light blue pleated skirt, white socks
+serafuku, maroon shirt, long sleeves, maroon sailor collar, white stripes, white bow, maroon pleated skirt, black socks
+serafuku, maroon shirt, long sleeves, maroon sailor collar, yellow stripes, yellow bow, maroon pleated skirt, black pantyhose
+serafuku, grey shirt, long sleeves, grey sailor collar, black stripes, red bow, grey pleated skirt, black pantyhose
+serafuku, grey shirt, long sleeves, navy blue sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks
+serafuku, brown shirt, long sleeves, brown sailor collar, white stripes, orange bow, brown pleated skirt, black socks
+serafuku, beige shirt, long sleeves, brown sailor collar, white stripes, brown bow, brown pleated skirt, white socks
+serafuku, dark green shirt, long sleeves, dark green sailor collar, white stripes, white bow, dark green pleated skirt, black socks
+serafuku, blue shirt, long sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks
+serafuku, purple shirt, long sleeves, purple sailor collar, white stripes, white bow, purple pleated skirt, black socks
+navy blue sailor dress, long sleeves, navy blue sailor collar, white stripes, red bow, brown belt, white socks
+black sailor dress, long sleeves, white sailor collar, black stripes, black bow, black belt, black socks
+serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue cardigan, navy blue pleated skirt, white socks
+serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, beige cardigan, navy blue pleated skirt, white socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, white cardigan, black pleated skirt, black pantyhose
+school uniform, navy blue blazer, white collared shirt, red necktie, grey plaid skirt, navy blue socks
+school uniform, navy blue blazer, white collared shirt, red neck ribbon, navy blue plaid skirt, white socks
+school uniform, navy blue blazer, white collared shirt, blue necktie, navy blue pleated skirt, black pantyhose
+school uniform, navy blue blazer, white collared shirt, green neck ribbon, green plaid skirt, navy blue socks
+school uniform, navy blue blazer, white collared shirt, yellow neck ribbon, navy blue plaid skirt, white socks
+school uniform, navy blue blazer, white trim, white collared shirt, red neck ribbon, red plaid skirt, black socks
+school uniform, navy blue blazer, double-breasted, white collared shirt, blue necktie, blue plaid skirt, white socks
+school uniform, navy blue blazer, white collared shirt, red bowtie, navy blue plaid skirt, white socks
+school uniform, black blazer, white collared shirt, green necktie, green plaid skirt, black socks
+school uniform, black blazer, white collared shirt, red necktie, black pleated skirt, black pantyhose
+school uniform, black blazer, red trim, white collared shirt, red neck ribbon, red plaid skirt, black socks
+school uniform, black blazer, white collared shirt, grey necktie, grey plaid skirt, white socks
+school uniform, black blazer, white collared shirt, blue neck ribbon, blue plaid skirt, white socks
+school uniform, black blazer, white collared shirt, black bowtie, grey plaid skirt, black socks
+school uniform, brown blazer, white collared shirt, red neck ribbon, red plaid skirt, black socks
+school uniform, brown blazer, white collared shirt, green necktie, brown plaid skirt, white socks
+school uniform, beige blazer, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, navy blue socks
+school uniform, beige blazer, white collared shirt, red necktie, red plaid skirt, white socks
+school uniform, beige blazer, white collared shirt, brown neck ribbon, brown plaid skirt, white socks
+school uniform, grey blazer, double-breasted, white collared shirt, green necktie, green plaid skirt, grey socks
+school uniform, grey blazer, white collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks
+school uniform, grey blazer, white collared shirt, red neck ribbon, red plaid skirt, white socks
+school uniform, grey blazer, white collared shirt, pink neck ribbon, grey plaid skirt, white socks
+school uniform, white blazer, gold trim, white collared shirt, blue neck ribbon, blue plaid skirt, white socks
+school uniform, white blazer, navy blue trim, white collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks
+school uniform, white blazer, white collared shirt, red neck ribbon, red plaid skirt, white socks
+school uniform, maroon blazer, white collared shirt, grey necktie, grey pleated skirt, black pantyhose
+school uniform, maroon blazer, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, white socks
+school uniform, maroon blazer, white collared shirt, black neck ribbon, maroon plaid skirt, black socks
+school uniform, dark green blazer, white collared shirt, yellow neck ribbon, green plaid skirt, white socks
+school uniform, dark green blazer, white collared shirt, red necktie, red tartan skirt, black socks
+school uniform, dark green blazer, white collared shirt, navy blue necktie, grey pleated skirt, navy blue socks
+school uniform, light blue blazer, white collared shirt, navy blue neck ribbon, blue plaid skirt, white socks
+school uniform, light blue blazer, white collared shirt, red neck ribbon, grey plaid skirt, white socks
+school uniform, blue blazer, white collared shirt, yellow necktie, blue plaid skirt, white socks
+school uniform, purple blazer, white collared shirt, black neck ribbon, purple plaid skirt, black socks
+school uniform, purple blazer, white collared shirt, white neck ribbon, grey plaid skirt, white socks
+school uniform, pink blazer, white collared shirt, red neck ribbon, pink plaid skirt, white socks
+school uniform, red blazer, white collared shirt, black neck ribbon, black plaid skirt, black socks
+school uniform, navy blue blazer, light blue collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks
+school uniform, navy blue blazer, pink collared shirt, red neck ribbon, grey plaid skirt, white socks
+school uniform, navy blue blazer, open blazer, grey sweater vest, white collared shirt, red necktie, grey plaid skirt, navy blue socks
+school uniform, navy blue blazer, open blazer, beige sweater, white collared shirt, red neck ribbon, red plaid skirt, white socks
+school uniform, black blazer, open blazer, grey sweater vest, white collared shirt, blue necktie, black plaid skirt, black socks
+school uniform, navy blue blazer, open blazer, navy blue cardigan, white collared shirt, green necktie, green plaid skirt, navy blue socks
+school uniform, brown blazer, open blazer, beige sweater vest, white collared shirt, red neck ribbon, brown plaid skirt, white socks
+school uniform, navy blue blazer, white collared shirt, red necktie, grey plaid pants, navy blue socks
+school uniform, black blazer, white collared shirt, grey necktie, black pants, black socks
+school uniform, navy blue blazer, white collared shirt, green neck ribbon, green tartan long skirt, black socks
+school uniform, grey blazer, white collared shirt, navy blue neck ribbon, grey long skirt, white socks
+school uniform, navy blue pinafore dress, white collared shirt, long sleeves, red neck ribbon, black socks
+school uniform, grey pinafore dress, white collared shirt, long sleeves, blue neck ribbon, white socks
+school uniform, black pinafore dress, white collared shirt, long sleeves, black neck ribbon, white socks
+school uniform, maroon pinafore dress, white collared shirt, long sleeves, white neck ribbon, black socks
+school uniform, brown pinafore dress, white collared shirt, long sleeves, red neck ribbon, white socks
+school uniform, dark green pinafore dress, white collared shirt, long sleeves, yellow neck ribbon, white socks
+school uniform, navy blue bolero jacket, white blouse, red bow, navy blue pleated skirt, white socks
+school uniform, black bolero jacket, white blouse, white bow, black pleated skirt, black socks
+school uniform, grey bolero jacket, white blouse, navy blue bow, grey pleated skirt, white socks
+school uniform, maroon eton jacket, white blouse, round collar, black neck ribbon, maroon pleated skirt, black socks
+school uniform, dark green eton jacket, white blouse, round collar, red neck ribbon, dark green pleated skirt, white socks
+school uniform, black dress, long dress, white collar, long sleeves, black neck ribbon, white socks
+school uniform, navy blue dress, white sailor collar, long sleeves, navy blue belt, white socks
+school uniform, grey dress, white collar, long sleeves, red neck ribbon, grey belt, black socks
+school uniform, maroon dress, long dress, white collar, long sleeves, white neck ribbon, black socks
+school uniform, brown dress, white collar, long sleeves, brown neck ribbon, brown belt, white socks
+school uniform, beige cardigan, white collared shirt, blue neck ribbon, blue plaid skirt, white socks
+school uniform, navy blue cardigan, white collared shirt, red necktie, grey plaid skirt, navy blue socks
+school uniform, pink cardigan, oversized cardigan, sleeves past wrists, white collared shirt, red neck ribbon, red plaid skirt, white socks
+school uniform, grey cardigan, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, black socks
+school uniform, black cardigan, white collared shirt, red necktie, black plaid skirt, black pantyhose
+school uniform, white cardigan, white collared shirt, green neck ribbon, green plaid skirt, white socks
+school uniform, light blue cardigan, white collared shirt, navy blue neck ribbon, navy blue pleated skirt, white socks
+school uniform, navy blue sweater vest, white collared shirt, short sleeves, red necktie, grey plaid skirt, navy blue socks
+school uniform, beige sweater vest, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks
+school uniform, grey sweater vest, white collared shirt, short sleeves, blue necktie, blue plaid skirt, white socks
+school uniform, white sweater vest, white collared shirt, short sleeves, green neck ribbon, green plaid skirt, white socks
+school uniform, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks
+school uniform, white collared shirt, short sleeves, green necktie, green plaid skirt, white socks
+school uniform, light blue collared shirt, short sleeves, navy blue necktie, navy blue plaid skirt, white socks
+school uniform, white polo shirt, short sleeves, navy blue pleated skirt, white socks
+school uniform, navy blue vest, white collared shirt, short sleeves, red neck ribbon, navy blue pleated skirt, white socks
+school uniform, navy blue sweater, white collared shirt, red necktie, grey plaid skirt, black pantyhose
+school uniform, red sweater, white collared shirt, black neck ribbon, black plaid skirt, black socks
+school uniform, beige sweater, white collared shirt, brown neck ribbon, brown plaid skirt, white socks
+school uniform, navy blue duffel coat, brown toggles, red plaid skirt, black pantyhose
+school uniform, beige duffel coat, brown toggles, navy blue plaid skirt, black pantyhose
+school uniform, red duffel coat, white toggles, grey plaid skirt, black pantyhose
+school uniform, navy blue peacoat, navy blue pleated skirt, black pantyhose, brown school bag
+school uniform, beige peacoat, green plaid skirt, black pantyhose, black school bag
+school uniform, black chesterfield coat, grey plaid skirt, black pantyhose
+school uniform, grey long coat, red plaid skirt, black pantyhose
+school uniform, brown trench coat, brown belt, navy blue plaid skirt, black pantyhose
+school uniform, grey hoodie, hood down, navy blue blazer, open blazer, grey plaid skirt, white loose socks
+school uniform, black hoodie, hood down, black blazer, open blazer, red plaid skirt, black socks
+school uniform, pink hoodie, hood down, beige cardigan, blue plaid skirt, white socks
+school uniform, red track jacket, open jacket, white collared shirt, navy blue plaid skirt, white socks
+gyaru, school uniform, white collared shirt, open collar, red loose necktie, beige cardigan around waist, red plaid skirt, short skirt, white loose socks
+school uniform, navy blue blazer, buttoned blazer, white collared shirt, red neck ribbon, navy blue long skirt, white socks, black-framed eyewear
+black serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black long skirt, white socks
+white gym shirt, short sleeves, navy blue trim, white name tag, navy blue track shorts, white socks
+white gym shirt, short sleeves, red trim, white name tag, red track shorts, white socks
+white gym shirt, short sleeves, green trim, white name tag, green track shorts, white socks
+white gym shirt, short sleeves, blue trim, white name tag, blue track shorts, white socks
+white gym shirt, short sleeves, maroon trim, white name tag, maroon track shorts, white socks
+white gym shirt, short sleeves, navy blue trim, white name tag, navy blue buruma, white socks
+white gym shirt, short sleeves, red trim, white name tag, red buruma, white socks
+white gym shirt, short sleeves, green trim, white name tag, green buruma, white socks
+white gym shirt, short sleeves, maroon trim, white name tag, maroon buruma, white socks
+track suit, blue track jacket, white zipper, white stripes, blue track pants
+track suit, navy blue track jacket, white zipper, white stripes, navy blue track pants
+track suit, red track jacket, white zipper, white stripes, red track pants
+track suit, green track jacket, white zipper, white stripes, green track pants
+track suit, maroon track jacket, white zipper, white stripes, maroon track pants
+track suit, black track jacket, white zipper, white stripes, black track pants
+track suit, purple track jacket, white zipper, white stripes, purple track pants
+blue track jacket, open jacket, white gym shirt, blue track shorts, white socks

@@ -1,50 +1,50 @@
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, navy blue pleated skirt, white socks, black loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue plaid skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, light blue sailor collar, white stripes, navy blue bow, light blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, light blue sailor collar, navy blue stripes, blue necktie, navy blue pleated skirt, navy blue socks, black loafers
-serafuku, white shirt, short sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, green sailor collar, white stripes, yellow bow, green pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, dark green sailor collar, white stripes, maroon necktie, dark green pleated skirt, black socks, black loafers
-serafuku, white shirt, short sleeves, maroon sailor collar, white stripes, maroon bow, maroon pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, red sailor collar, white stripes, red bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, black sailor collar, white stripes, red bow, black pleated skirt, white socks, black loafers
-serafuku, white shirt, short sleeves, grey sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks, black loafers
-serafuku, white shirt, short sleeves, brown sailor collar, beige stripes, orange bow, brown pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, purple sailor collar, white stripes, pink bow, purple pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, pink sailor collar, white stripes, red bow, pink pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, beige sweater vest, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue long skirt, white socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue pleated skirt, black socks, black loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, navy blue socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, light blue stripes, light blue necktie, navy blue pleated skirt, white socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, black socks, black loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, black pantyhose, black loafers
-serafuku, navy blue shirt, long sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, red plaid skirt, black socks, brown loafers
-serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue long skirt, black socks, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black pleated skirt, black pantyhose, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, red stripes, red necktie, black pleated skirt, black socks, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, black pleated skirt, white socks, black loafers
-serafuku, black shirt, long sleeves, white sailor collar, black stripes, black bow, black pleated skirt, black socks, black loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, black bow, black long skirt, white socks, white sneakers
-serafuku, white shirt, long sleeves, black sailor collar, white stripes, black bow, black pleated skirt, black socks, black loafers
-serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, navy blue necktie, navy blue pleated skirt, navy blue socks, brown loafers
-serafuku, white shirt, long sleeves, light blue sailor collar, white stripes, light blue bow, light blue pleated skirt, white socks, brown loafers
-serafuku, maroon shirt, long sleeves, maroon sailor collar, white stripes, white bow, maroon pleated skirt, black socks, black loafers
-serafuku, maroon shirt, long sleeves, maroon sailor collar, yellow stripes, yellow bow, maroon pleated skirt, black pantyhose, black loafers
-serafuku, grey shirt, long sleeves, grey sailor collar, black stripes, red bow, grey pleated skirt, black pantyhose, black loafers
-serafuku, grey shirt, long sleeves, navy blue sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks, brown loafers
-serafuku, brown shirt, long sleeves, brown sailor collar, white stripes, orange bow, brown pleated skirt, black socks, brown loafers
-serafuku, beige shirt, long sleeves, brown sailor collar, white stripes, brown bow, brown pleated skirt, white socks, brown loafers
-serafuku, dark green shirt, long sleeves, dark green sailor collar, white stripes, white bow, dark green pleated skirt, black socks, black loafers
-serafuku, blue shirt, long sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks, brown loafers
-serafuku, purple shirt, long sleeves, purple sailor collar, white stripes, white bow, purple pleated skirt, black socks, black loafers
-navy blue sailor dress, long sleeves, navy blue sailor collar, white stripes, red bow, brown belt, white socks, brown loafers
-black sailor dress, long sleeves, white sailor collar, black stripes, black bow, black belt, black socks, black loafers
-serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue cardigan, navy blue pleated skirt, white socks, brown loafers
-serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, beige cardigan, navy blue pleated skirt, white socks, brown loafers
-serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, white cardigan, black pleated skirt, black pantyhose, black loafers
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue plaid skirt, white socks
+serafuku, white shirt, short sleeves, light blue sailor collar, white stripes, navy blue bow, light blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, light blue sailor collar, navy blue stripes, blue necktie, navy blue pleated skirt, navy blue socks
+serafuku, white shirt, short sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, green sailor collar, white stripes, yellow bow, green pleated skirt, white socks
+serafuku, white shirt, short sleeves, dark green sailor collar, white stripes, maroon necktie, dark green pleated skirt, black socks
+serafuku, white shirt, short sleeves, maroon sailor collar, white stripes, maroon bow, maroon pleated skirt, white socks
+serafuku, white shirt, short sleeves, red sailor collar, white stripes, red bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, black sailor collar, white stripes, red bow, black pleated skirt, white socks
+serafuku, white shirt, short sleeves, grey sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks
+serafuku, white shirt, short sleeves, brown sailor collar, beige stripes, orange bow, brown pleated skirt, white socks
+serafuku, white shirt, short sleeves, purple sailor collar, white stripes, pink bow, purple pleated skirt, white socks
+serafuku, white shirt, short sleeves, pink sailor collar, white stripes, red bow, pink pleated skirt, white socks
+serafuku, white shirt, short sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, beige sweater vest, navy blue pleated skirt, white socks
+serafuku, white shirt, short sleeves, navy blue sailor collar, white stripes, red bow, navy blue long skirt, white socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue pleated skirt, black socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue pleated skirt, navy blue socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, light blue stripes, light blue necktie, navy blue pleated skirt, white socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, yellow stripes, yellow bow, navy blue pleated skirt, black socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red necktie, navy blue pleated skirt, black pantyhose
+serafuku, navy blue shirt, long sleeves, white sailor collar, navy blue stripes, navy blue bow, navy blue pleated skirt, white socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, red bow, red plaid skirt, black socks
+serafuku, navy blue shirt, long sleeves, navy blue sailor collar, white stripes, white bow, navy blue long skirt, black socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, black pleated skirt, black pantyhose
+serafuku, black shirt, long sleeves, black sailor collar, red stripes, red necktie, black pleated skirt, black socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, black pleated skirt, white socks
+serafuku, black shirt, long sleeves, white sailor collar, black stripes, black bow, black pleated skirt, black socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, black bow, black long skirt, white socks
+serafuku, white shirt, long sleeves, black sailor collar, white stripes, black bow, black pleated skirt, black socks
+serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, navy blue necktie, navy blue pleated skirt, navy blue socks
+serafuku, white shirt, long sleeves, light blue sailor collar, white stripes, light blue bow, light blue pleated skirt, white socks
+serafuku, maroon shirt, long sleeves, maroon sailor collar, white stripes, white bow, maroon pleated skirt, black socks
+serafuku, maroon shirt, long sleeves, maroon sailor collar, yellow stripes, yellow bow, maroon pleated skirt, black pantyhose
+serafuku, grey shirt, long sleeves, grey sailor collar, black stripes, red bow, grey pleated skirt, black pantyhose
+serafuku, grey shirt, long sleeves, navy blue sailor collar, white stripes, navy blue bow, grey pleated skirt, white socks
+serafuku, brown shirt, long sleeves, brown sailor collar, white stripes, orange bow, brown pleated skirt, black socks
+serafuku, beige shirt, long sleeves, brown sailor collar, white stripes, brown bow, brown pleated skirt, white socks
+serafuku, dark green shirt, long sleeves, dark green sailor collar, white stripes, white bow, dark green pleated skirt, black socks
+serafuku, blue shirt, long sleeves, blue sailor collar, white stripes, white bow, blue pleated skirt, white socks
+serafuku, purple shirt, long sleeves, purple sailor collar, white stripes, white bow, purple pleated skirt, black socks
+navy blue sailor dress, long sleeves, navy blue sailor collar, white stripes, red bow, brown belt, white socks
+black sailor dress, long sleeves, white sailor collar, black stripes, black bow, black belt, black socks
+serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, navy blue cardigan, navy blue pleated skirt, white socks
+serafuku, white shirt, long sleeves, navy blue sailor collar, white stripes, red bow, beige cardigan, navy blue pleated skirt, white socks
+serafuku, black shirt, long sleeves, black sailor collar, white stripes, red bow, white cardigan, black pleated skirt, black pantyhose

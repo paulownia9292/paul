@@ -1,35 +1,35 @@
-school uniform, navy blue pinafore dress, white collared shirt, long sleeves, red neck ribbon, black socks, black mary janes
-school uniform, grey pinafore dress, white collared shirt, long sleeves, blue neck ribbon, white socks, brown loafers
-school uniform, black pinafore dress, white collared shirt, long sleeves, black neck ribbon, white socks, black mary janes
-school uniform, maroon pinafore dress, white collared shirt, long sleeves, white neck ribbon, black socks, black loafers
-school uniform, brown pinafore dress, white collared shirt, long sleeves, red neck ribbon, white socks, brown loafers
-school uniform, dark green pinafore dress, white collared shirt, long sleeves, yellow neck ribbon, white socks, brown loafers
-school uniform, navy blue bolero jacket, white blouse, red bow, navy blue pleated skirt, white socks, brown loafers
-school uniform, black bolero jacket, white blouse, white bow, black pleated skirt, black socks, black loafers
-school uniform, grey bolero jacket, white blouse, navy blue bow, grey pleated skirt, white socks, brown loafers
-school uniform, maroon eton jacket, white blouse, round collar, black neck ribbon, maroon pleated skirt, black socks, black loafers
-school uniform, dark green eton jacket, white blouse, round collar, red neck ribbon, dark green pleated skirt, white socks, brown loafers
-school uniform, black dress, long dress, white collar, long sleeves, black neck ribbon, white socks, black mary janes
-school uniform, navy blue dress, white sailor collar, long sleeves, navy blue belt, white socks, black mary janes
-school uniform, grey dress, white collar, long sleeves, red neck ribbon, grey belt, black socks, black loafers
-school uniform, maroon dress, long dress, white collar, long sleeves, white neck ribbon, black socks, black loafers
-school uniform, brown dress, white collar, long sleeves, brown neck ribbon, brown belt, white socks, brown loafers
-school uniform, beige cardigan, white collared shirt, blue neck ribbon, blue plaid skirt, white socks, brown loafers
-school uniform, navy blue cardigan, white collared shirt, red necktie, grey plaid skirt, navy blue socks, brown loafers
-school uniform, pink cardigan, oversized cardigan, sleeves past wrists, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, grey cardigan, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, black socks, black loafers
-school uniform, black cardigan, white collared shirt, red necktie, black plaid skirt, black pantyhose, black loafers
-school uniform, white cardigan, white collared shirt, green neck ribbon, green plaid skirt, white socks, brown loafers
-school uniform, light blue cardigan, white collared shirt, navy blue neck ribbon, navy blue pleated skirt, white socks, brown loafers
-school uniform, navy blue sweater vest, white collared shirt, short sleeves, red necktie, grey plaid skirt, navy blue socks, brown loafers
-school uniform, beige sweater vest, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, grey sweater vest, white collared shirt, short sleeves, blue necktie, blue plaid skirt, white socks, brown loafers
-school uniform, white sweater vest, white collared shirt, short sleeves, green neck ribbon, green plaid skirt, white socks, brown loafers
-school uniform, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks, brown loafers
-school uniform, white collared shirt, short sleeves, green necktie, green plaid skirt, white socks, brown loafers
-school uniform, light blue collared shirt, short sleeves, navy blue necktie, navy blue plaid skirt, white socks, brown loafers
-school uniform, white polo shirt, short sleeves, navy blue pleated skirt, white socks, white sneakers
-school uniform, navy blue vest, white collared shirt, short sleeves, red neck ribbon, navy blue pleated skirt, white socks, brown loafers
-school uniform, navy blue sweater, white collared shirt, red necktie, grey plaid skirt, black pantyhose, brown loafers
-school uniform, red sweater, white collared shirt, black neck ribbon, black plaid skirt, black socks, black loafers
-school uniform, beige sweater, white collared shirt, brown neck ribbon, brown plaid skirt, white socks, brown loafers
+school uniform, navy blue pinafore dress, white collared shirt, long sleeves, red neck ribbon, black socks
+school uniform, grey pinafore dress, white collared shirt, long sleeves, blue neck ribbon, white socks
+school uniform, black pinafore dress, white collared shirt, long sleeves, black neck ribbon, white socks
+school uniform, maroon pinafore dress, white collared shirt, long sleeves, white neck ribbon, black socks
+school uniform, brown pinafore dress, white collared shirt, long sleeves, red neck ribbon, white socks
+school uniform, dark green pinafore dress, white collared shirt, long sleeves, yellow neck ribbon, white socks
+school uniform, navy blue bolero jacket, white blouse, red bow, navy blue pleated skirt, white socks
+school uniform, black bolero jacket, white blouse, white bow, black pleated skirt, black socks
+school uniform, grey bolero jacket, white blouse, navy blue bow, grey pleated skirt, white socks
+school uniform, maroon eton jacket, white blouse, round collar, black neck ribbon, maroon pleated skirt, black socks
+school uniform, dark green eton jacket, white blouse, round collar, red neck ribbon, dark green pleated skirt, white socks
+school uniform, black dress, long dress, white collar, long sleeves, black neck ribbon, white socks
+school uniform, navy blue dress, white sailor collar, long sleeves, navy blue belt, white socks
+school uniform, grey dress, white collar, long sleeves, red neck ribbon, grey belt, black socks
+school uniform, maroon dress, long dress, white collar, long sleeves, white neck ribbon, black socks
+school uniform, brown dress, white collar, long sleeves, brown neck ribbon, brown belt, white socks
+school uniform, beige cardigan, white collared shirt, blue neck ribbon, blue plaid skirt, white socks
+school uniform, navy blue cardigan, white collared shirt, red necktie, grey plaid skirt, navy blue socks
+school uniform, pink cardigan, oversized cardigan, sleeves past wrists, white collared shirt, red neck ribbon, red plaid skirt, white socks
+school uniform, grey cardigan, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, black socks
+school uniform, black cardigan, white collared shirt, red necktie, black plaid skirt, black pantyhose
+school uniform, white cardigan, white collared shirt, green neck ribbon, green plaid skirt, white socks
+school uniform, light blue cardigan, white collared shirt, navy blue neck ribbon, navy blue pleated skirt, white socks
+school uniform, navy blue sweater vest, white collared shirt, short sleeves, red necktie, grey plaid skirt, navy blue socks
+school uniform, beige sweater vest, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks
+school uniform, grey sweater vest, white collared shirt, short sleeves, blue necktie, blue plaid skirt, white socks
+school uniform, white sweater vest, white collared shirt, short sleeves, green neck ribbon, green plaid skirt, white socks
+school uniform, white collared shirt, short sleeves, red neck ribbon, red plaid skirt, white socks
+school uniform, white collared shirt, short sleeves, green necktie, green plaid skirt, white socks
+school uniform, light blue collared shirt, short sleeves, navy blue necktie, navy blue plaid skirt, white socks
+school uniform, white polo shirt, short sleeves, navy blue pleated skirt, white socks
+school uniform, navy blue vest, white collared shirt, short sleeves, red neck ribbon, navy blue pleated skirt, white socks
+school uniform, navy blue sweater, white collared shirt, red necktie, grey plaid skirt, black pantyhose
+school uniform, red sweater, white collared shirt, black neck ribbon, black plaid skirt, black socks
+school uniform, beige sweater, white collared shirt, brown neck ribbon, brown plaid skirt, white socks
