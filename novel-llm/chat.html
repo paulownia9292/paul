@@ -122,6 +122,29 @@
   #composer { border-top: 1px solid var(--border); background: var(--panel); padding: 10px 14px 12px; }
   #composer .inner { display: flex; gap: 8px; align-items: flex-end; }
   #input { flex: 1; min-height: 52px; max-height: 40vh; resize: none; }
+  #attachBtn { align-self: flex-end; height: 40px; font-size: 18px; padding: 0 10px; }
+  #attachList { display: flex; flex-wrap: wrap; gap: 6px; }
+  #attachList:not(:empty) { margin-bottom: 8px; }
+  .chip {
+    display: inline-flex; align-items: center; gap: 6px; border: 1px solid var(--border);
+    border-radius: 6px; padding: 3px 4px 3px 8px; font-size: 12px; background: var(--bg); max-width: 100%;
+  }
+  .chip img { height: 34px; width: auto; border-radius: 4px; display: block; }
+  .chip .name { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; max-width: 220px; }
+  .chip .meta { color: var(--muted); }
+  .chip.warn { border-color: var(--danger); }
+  .chip button { border: none; padding: 0 4px; color: var(--muted); }
+  .attachments { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px; margin-bottom: 8px; white-space: normal; }
+  .attachments img { max-height: 180px; max-width: 100%; border-radius: 6px; border: 1px solid var(--border); cursor: zoom-in; display: block; }
+  .attachments details { font-size: 13px; border: 1px solid var(--border); border-radius: 6px; padding: 3px 8px; background: var(--bg); max-width: 100%; }
+  .attachments details summary { cursor: pointer; }
+  .attachments details pre { white-space: pre-wrap; max-height: 300px; overflow: auto; margin: 6px 0 2px; font: inherit; line-height: 1.6; }
+  #attachNote { font-size: 12px; color: var(--danger); width: 100%; }
+  #dropMask {
+    position: fixed; inset: 0; z-index: 50; display: none; align-items: center; justify-content: center;
+    background: rgba(59,110,168,.18); border: 3px dashed var(--accent); font-size: 20px; color: var(--text); pointer-events: none;
+  }
+  body.dragging #dropMask { display: flex; }
   #composer .btns { display: flex; flex-direction: column; gap: 6px; }
   #composer .hint { font-size: 12px; color: var(--muted); margin-top: 4px; display: flex; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 
@@ -190,7 +213,11 @@
   </div>
   <div id="log"><div class="inner" id="logInner"></div></div>
   <div id="composer">
+    <div class="inner" id="attachList"></div>
     <div class="inner">
+      <button id="attachBtn" title="テキストや画像を添付（ドラッグ＆ドロップ・画像の貼り付けもできます）">📎</button>
+      <input type="file" id="attachFile" multiple hidden
+        accept="image/*,.txt,.md,.markdown,.csv,.tsv,.json,.log,.html,.htm,.xml,.yaml,.yml,.ini,.js,.py,.css,text/*">
       <textarea id="input" rows="2" placeholder="メッセージを入力…"></textarea>
       <div class="btns">
         <button class="primary" id="sendBtn">送信</button>
@@ -203,6 +230,7 @@
     </div>
   </div>
 </main>
+<div id="dropMask">ここにドロップして添付</div>
 
 <aside id="settings">
   <h3>設定</h3>
@@ -321,7 +349,13 @@
   }
   function save(key, value) {
     try { localStorage.setItem(key, JSON.stringify(value)); }
-    catch (e) { console.warn("保存できませんでした", e); }
+    catch (e) {
+      console.warn("保存できませんでした", e);
+      if (!save.warned) {
+        save.warned = true;
+        alert("ブラウザ内の保存領域（約5MB）がいっぱいで、会話を保存できませんでした。\n画像の多い会話は、左下の「保存フォルダを選ぶ」でファイルに保存するか、古い会話を削除してください。");
+      }
+    }
   }
 
   const settings = Object.assign({}, DEFAULT_SETTINGS, load(LS_SETTINGS, {}));
@@ -384,6 +418,7 @@
         sel.appendChild(o);
       }
       setStatus("ok", settings.model.replace(/:latest$/, ""));
+      checkCapabilities();
     } catch (e) {
       setStatus("ng", "Ollamaに接続できません");
       const sel = $("sModel");
@@ -488,6 +523,27 @@
       d.append(s, p);
       bubble.appendChild(d);
     }
+    if ((m.images && m.images.length) || (m.files && m.files.length)) {
+      const box = document.createElement("div");
+      box.className = "attachments";
+      for (const img of m.images || []) {
+        const el = document.createElement("img");
+        el.src = "data:image/jpeg;base64," + img.data;
+        el.alt = el.title = img.name || "画像";
+        el.onclick = () => { const w = window.open(); if (w) w.document.write('<img src="' + el.src + '" style="max-width:100%">'); };
+        box.appendChild(el);
+      }
+      for (const f of m.files || []) {
+        const d = document.createElement("details");
+        const s = document.createElement("summary");
+        s.textContent = `📄 ${f.name}（${f.text.length.toLocaleString()} 字）`;
+        const pre = document.createElement("pre");
+        pre.textContent = f.text;
+        d.append(s, pre);
+        box.appendChild(d);
+      }
+      bubble.appendChild(box);
+    }
     bubble.appendChild(document.createTextNode(m.content));
   }
 
@@ -560,12 +616,21 @@
   }
 
   // ---------- 生成 ----------
+  // 添付テキストは本文の前に付けてモデルに渡す
+  function contentWithFiles(m) {
+    if (!m.files || !m.files.length) return m.content;
+    const parts = m.files.map(f => `【添付ファイル：${f.name}】\n<<<\n${f.text}\n>>>`);
+    return parts.join("\n\n") + (m.content ? "\n\n" + m.content : "");
+  }
+
   function buildPayloadMessages(c, upto) {
     const msgs = [];
     if (c.system && c.system.trim()) msgs.push({ role: "system", content: c.system });
     for (const m of c.messages.slice(0, upto)) {
       if (m.error) continue;
-      msgs.push({ role: m.role, content: m.content });
+      const msg = { role: m.role, content: contentWithFiles(m) };
+      if (m.images && m.images.length) msg.images = m.images.map(i => i.data);
+      msgs.push(msg);
     }
     return msgs;
   }
@@ -682,7 +747,9 @@
     if (busy) return;
     const text = input.value;
     const c = cur();
-    if (!text.trim()) {
+    if (!text.trim() && pendingAttach.length) {
+      // 添付だけの送信
+    } else if (!text.trim()) {
       // 空送信：最後がユーザー発言なら返答を生成
       if (c.messages.length && c.messages[c.messages.length - 1].role === "user") {
         const target = { role: "assistant", content: "" };
@@ -691,8 +758,14 @@
       }
       return;
     }
-    c.messages.push({ role: "user", content: text });
-    autoTitle(c, text);
+    const um = { role: "user", content: text };
+    const imgs = pendingAttach.filter(a => a.type === "image").map(a => ({ name: a.name, data: a.data }));
+    const files = pendingAttach.filter(a => a.type === "text").map(a => ({ name: a.name, text: a.text }));
+    if (imgs.length) um.images = imgs;
+    if (files.length) um.files = files;
+    pendingAttach = []; renderAttach();
+    c.messages.push(um);
+    autoTitle(c, text || (files[0] && files[0].name) || (imgs.length ? "画像" : ""));
     input.value = ""; autoGrow();
     const target = { role: "assistant", content: "" };
     c.messages.push(target);
@@ -774,7 +847,10 @@
   function convToText(c) {
     const lines = [];
     if (c.system) lines.push("【システム】\n" + c.system + "\n");
-    for (const m of c.messages) lines.push((m.role === "user" ? "【あなた】\n" : "【AI】\n") + m.content + "\n");
+    for (const m of c.messages) {
+      const att = [...(m.images || []).map(i => "［画像：" + (i.name || "画像") + "］"), ...(m.files || []).map(f => "［添付：" + f.name + "］")];
+      lines.push((m.role === "user" ? "【あなた】\n" : "【AI】\n") + (att.length ? att.join(" ") + "\n" : "") + m.content + "\n");
+    }
     return lines.join("\n");
   }
   const safeName = t => (t || "chat").replace(/[\\/:*?"<>|\r\n\t]/g, "_").replace(/[. ]+$/, "").slice(0, 40) || "chat";
@@ -847,6 +923,7 @@
   };
   $("sModel").addEventListener("change", e => {
     settings.model = e.target.value; saveSettings();
+    checkCapabilities();
     setStatus("ok", settings.model.replace(/:latest$/, ""));
   });
   $("sSystem").addEventListener("input", e => { cur().system = e.target.value; saveConvs(); queueFileSave(currentId); updateModeSel(); });
@@ -1050,6 +1127,142 @@
     if (dirHandle) await activateDir(false);
     else setAsState("", "未設定（ブラウザ内には自動保存されています）");
   }
+
+  // ---------- 添付ファイル ----------
+  let pendingAttach = [];      // { type: "image", name, data } / { type: "text", name, text }
+  let visionSupported = null;  // null = 不明
+  const MAX_IMAGE_SIDE = 1280; // 画像はこの大きさまで縮小して送る（保存容量とVRAMの節約）
+  const TEXT_EXT = /\.(txt|md|markdown|csv|tsv|json|log|html?|xml|ya?ml|ini|js|py|css|srt)$/i;
+
+  async function checkCapabilities() {
+    visionSupported = null;
+    try {
+      const res = await fetch(apiBase() + "/api/show", {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ model: settings.model })
+      });
+      if (!res.ok) return;
+      const j = await res.json();
+      if (Array.isArray(j.capabilities)) visionSupported = j.capabilities.includes("vision");
+    } catch {}
+    renderAttach();
+  }
+
+  // 文字コードを判定してテキストを読む（UTF-8 → だめなら Shift_JIS）
+  async function readText(file) {
+    const buf = await file.arrayBuffer();
+    let bytes = new Uint8Array(buf);
+    if (bytes[0] === 0xEF && bytes[1] === 0xBB && bytes[2] === 0xBF) bytes = bytes.subarray(3);
+    if (bytes[0] === 0xFF && bytes[1] === 0xFE) return new TextDecoder("utf-16le").decode(bytes.subarray(2));
+    if (bytes[0] === 0xFE && bytes[1] === 0xFF) return new TextDecoder("utf-16be").decode(bytes.subarray(2));
+    try { return new TextDecoder("utf-8", { fatal: true }).decode(bytes); }
+    catch { return new TextDecoder("shift_jis").decode(bytes); }
+  }
+
+  function loadImage(file) {
+    return new Promise((resolve, reject) => {
+      const url = URL.createObjectURL(file);
+      const img = new Image();
+      img.onload = () => { URL.revokeObjectURL(url); resolve(img); };
+      img.onerror = () => { URL.revokeObjectURL(url); reject(new Error("画像を読み込めません")); };
+      img.src = url;
+    });
+  }
+
+  async function readImage(file) {
+    const img = await loadImage(file);
+    const scale = Math.min(1, MAX_IMAGE_SIDE / Math.max(img.naturalWidth, img.naturalHeight));
+    const w = Math.round(img.naturalWidth * scale), h = Math.round(img.naturalHeight * scale);
+    const cv = document.createElement("canvas");
+    cv.width = w; cv.height = h;
+    const g = cv.getContext("2d");
+    g.fillStyle = "#fff"; g.fillRect(0, 0, w, h); // 透過PNGの背景を白に
+    g.drawImage(img, 0, 0, w, h);
+    return cv.toDataURL("image/jpeg", 0.88).split(",")[1];
+  }
+
+  async function addFiles(fileList) {
+    for (const f of fileList) {
+      try {
+        if (f.type.startsWith("image/")) {
+          pendingAttach.push({ type: "image", name: f.name || "貼り付け画像", data: await readImage(f) });
+        } else if (f.type.startsWith("text/") || TEXT_EXT.test(f.name) || f.type === "application/json") {
+          const text = (await readText(f)).replace(/\r\n?/g, "\n").replace(/\s+$/, "");
+          pendingAttach.push({ type: "text", name: f.name, text });
+        } else {
+          alert(`「${f.name}」は添付できません。テキストファイル（.txt など）か画像を選んでください。`);
+        }
+      } catch (e) {
+        alert(`「${f.name}」を読み込めませんでした：${e.message}`);
+      }
+    }
+    renderAttach();
+    input.focus();
+  }
+
+  function renderAttach() {
+    const el = $("attachList");
+    el.innerHTML = "";
+    pendingAttach.forEach((a, i) => {
+      const chip = document.createElement("span");
+      chip.className = "chip";
+      if (a.type === "image") {
+        const im = document.createElement("img");
+        im.src = "data:image/jpeg;base64," + a.data;
+        chip.appendChild(im);
+        if (visionSupported === false) chip.classList.add("warn");
+      } else {
+        chip.appendChild(document.createTextNode("📄"));
+      }
+      const name = document.createElement("span");
+      name.className = "name"; name.textContent = a.name;
+      chip.appendChild(name);
+      if (a.type === "text") {
+        const meta = document.createElement("span");
+        meta.className = "meta"; meta.textContent = a.text.length.toLocaleString() + " 字";
+        chip.appendChild(meta);
+      }
+      const x = document.createElement("button");
+      x.textContent = "✕"; x.title = "外す";
+      x.onclick = () => { pendingAttach.splice(i, 1); renderAttach(); };
+      chip.appendChild(x);
+      el.appendChild(chip);
+    });
+    const notes = [];
+    if (visionSupported === false && pendingAttach.some(a => a.type === "image")) {
+      notes.push("⚠ 今のモデル（" + settings.model.replace(/:latest$/, "") + "）は画像に対応していないようです。送るとエラーになるか、画像が無視されます。");
+    }
+    const chars = pendingAttach.reduce((n, a) => n + (a.text ? a.text.length : 0), 0);
+    if (chars > settings.options.num_ctx * 0.6) {
+      notes.push(`⚠ 添付テキストが長すぎます（約 ${chars.toLocaleString()} 字）。num_ctx（${settings.options.num_ctx}）に収まらず、前のほうが切り捨てられる可能性があります。`);
+    }
+    if (notes.length) {
+      const n = document.createElement("div");
+      n.id = "attachNote"; n.textContent = notes.join(" ");
+      el.appendChild(n);
+    }
+  }
+
+  $("attachBtn").onclick = () => $("attachFile").click();
+  $("attachFile").onchange = e => { const fs = [...e.target.files]; e.target.value = ""; addFiles(fs); };
+
+  // 画像の貼り付け（Ctrl+V）
+  input.addEventListener("paste", e => {
+    const files = [...(e.clipboardData?.files || [])].filter(f => f.type.startsWith("image/"));
+    if (files.length) { e.preventDefault(); addFiles(files); }
+  });
+
+  // ドラッグ＆ドロップ
+  let dragDepth = 0;
+  const hasFiles = e => [...(e.dataTransfer?.types || [])].includes("Files");
+  window.addEventListener("dragenter", e => { if (!hasFiles(e)) return; e.preventDefault(); dragDepth++; document.body.classList.add("dragging"); });
+  window.addEventListener("dragover", e => { if (hasFiles(e)) e.preventDefault(); });
+  window.addEventListener("dragleave", e => { if (!hasFiles(e)) return; if (--dragDepth <= 0) { dragDepth = 0; document.body.classList.remove("dragging"); } });
+  window.addEventListener("drop", e => {
+    if (!hasFiles(e)) return;
+    e.preventDefault(); dragDepth = 0; document.body.classList.remove("dragging");
+    addFiles([...e.dataTransfer.files]);
+  });
 
   // ---------- 起動 ----------
   applyTheme();
