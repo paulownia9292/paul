@@ -1,0 +1,50 @@
+school uniform, navy blue blazer, white collared shirt, red necktie, grey plaid skirt, navy blue socks, brown loafers
+school uniform, navy blue blazer, white collared shirt, red neck ribbon, navy blue plaid skirt, white socks, brown loafers
+school uniform, navy blue blazer, white collared shirt, blue necktie, navy blue pleated skirt, black pantyhose, black loafers
+school uniform, navy blue blazer, white collared shirt, green neck ribbon, green plaid skirt, navy blue socks, brown loafers
+school uniform, navy blue blazer, white collared shirt, yellow neck ribbon, navy blue plaid skirt, white socks, brown loafers
+school uniform, navy blue blazer, white trim, white collared shirt, red neck ribbon, red plaid skirt, black socks, black loafers
+school uniform, navy blue blazer, double-breasted, white collared shirt, blue necktie, blue plaid skirt, white socks, brown loafers
+school uniform, navy blue blazer, white collared shirt, red bowtie, navy blue plaid skirt, white socks, brown loafers
+school uniform, black blazer, white collared shirt, green necktie, green plaid skirt, black socks, black loafers
+school uniform, black blazer, white collared shirt, red necktie, black pleated skirt, black pantyhose, black loafers
+school uniform, black blazer, red trim, white collared shirt, red neck ribbon, red plaid skirt, black socks, black loafers
+school uniform, black blazer, white collared shirt, grey necktie, grey plaid skirt, white socks, black loafers
+school uniform, black blazer, white collared shirt, blue neck ribbon, blue plaid skirt, white socks, brown loafers
+school uniform, black blazer, white collared shirt, black bowtie, grey plaid skirt, black socks, black loafers
+school uniform, brown blazer, white collared shirt, red neck ribbon, red plaid skirt, black socks, brown loafers
+school uniform, brown blazer, white collared shirt, green necktie, brown plaid skirt, white socks, brown loafers
+school uniform, beige blazer, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, navy blue socks, brown loafers
+school uniform, beige blazer, white collared shirt, red necktie, red plaid skirt, white socks, brown loafers
+school uniform, beige blazer, white collared shirt, brown neck ribbon, brown plaid skirt, white socks, brown loafers
+school uniform, grey blazer, double-breasted, white collared shirt, green necktie, green plaid skirt, grey socks, black loafers
+school uniform, grey blazer, white collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks, brown loafers
+school uniform, grey blazer, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
+school uniform, grey blazer, white collared shirt, pink neck ribbon, grey plaid skirt, white socks, brown loafers
+school uniform, white blazer, gold trim, white collared shirt, blue neck ribbon, blue plaid skirt, white socks, brown loafers
+school uniform, white blazer, navy blue trim, white collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks, black loafers
+school uniform, white blazer, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
+school uniform, maroon blazer, white collared shirt, grey necktie, grey pleated skirt, black pantyhose, black loafers
+school uniform, maroon blazer, white collared shirt, navy blue neck ribbon, navy blue plaid skirt, white socks, brown loafers
+school uniform, maroon blazer, white collared shirt, black neck ribbon, maroon plaid skirt, black socks, black loafers
+school uniform, dark green blazer, white collared shirt, yellow neck ribbon, green plaid skirt, white socks, brown loafers
+school uniform, dark green blazer, white collared shirt, red necktie, red tartan skirt, black socks, brown loafers
+school uniform, dark green blazer, white collared shirt, navy blue necktie, grey pleated skirt, navy blue socks, black loafers
+school uniform, light blue blazer, white collared shirt, navy blue neck ribbon, blue plaid skirt, white socks, brown loafers
+school uniform, light blue blazer, white collared shirt, red neck ribbon, grey plaid skirt, white socks, brown loafers
+school uniform, blue blazer, white collared shirt, yellow necktie, blue plaid skirt, white socks, brown loafers
+school uniform, purple blazer, white collared shirt, black neck ribbon, purple plaid skirt, black socks, black loafers
+school uniform, purple blazer, white collared shirt, white neck ribbon, grey plaid skirt, white socks, brown loafers
+school uniform, pink blazer, white collared shirt, red neck ribbon, pink plaid skirt, white socks, brown loafers
+school uniform, red blazer, white collared shirt, black neck ribbon, black plaid skirt, black socks, black loafers
+school uniform, navy blue blazer, light blue collared shirt, navy blue necktie, navy blue plaid skirt, navy blue socks, brown loafers
+school uniform, navy blue blazer, pink collared shirt, red neck ribbon, grey plaid skirt, white socks, brown loafers
+school uniform, navy blue blazer, open blazer, grey sweater vest, white collared shirt, red necktie, grey plaid skirt, navy blue socks, brown loafers
+school uniform, navy blue blazer, open blazer, beige sweater, white collared shirt, red neck ribbon, red plaid skirt, white socks, brown loafers
+school uniform, black blazer, open blazer, grey sweater vest, white collared shirt, blue necktie, black plaid skirt, black socks, black loafers
+school uniform, navy blue blazer, open blazer, navy blue cardigan, white collared shirt, green necktie, green plaid skirt, navy blue socks, brown loafers
+school uniform, brown blazer, open blazer, beige sweater vest, white collared shirt, red neck ribbon, brown plaid skirt, white socks, brown loafers
+school uniform, navy blue blazer, white collared shirt, red necktie, grey plaid pants, navy blue socks, brown loafers
+school uniform, black blazer, white collared shirt, grey necktie, black pants, black socks, black loafers
+school uniform, navy blue blazer, white collared shirt, green neck ribbon, green tartan long skirt, black socks, brown loafers
+school uniform, grey blazer, white collared shirt, navy blue neck ribbon, grey long skirt, white socks, brown loafers
